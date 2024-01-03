@@ -81,7 +81,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           );
         }),
 
-        //popular
+        //recommended
         SizedBox(
           height: Dimensions.height20,
         ),
@@ -90,7 +90,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              BigText(text: "Popular"),
+              BigText(text: "Recommended"),
               SizedBox(
                 width: Dimensions.width10,
               ),
