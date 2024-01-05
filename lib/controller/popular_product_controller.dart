@@ -13,7 +13,7 @@ class PopularProductController extends GetxController {
 
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
-  int _quantity = 1;
+  int _quantity = 0;
 
   int get quantity => _quantity;
 
@@ -40,42 +40,68 @@ class PopularProductController extends GetxController {
     if (isIncrement) {
       //print("ok em ee");
       _quantity = checkQuantity(quantity + 1);
+      print("so luong sp:" + _quantity.toString());
     } else {
       _quantity = checkQuantity(quantity - 1);
+      print("so luong sp:" + _quantity.toString());
     }
     update();
   }
 
   checkQuantity(int quantity) {
-    if (quantity < 1) {
+    if (quantity < 0) {
       Get.snackbar(
         "Item count",
         "You can't reduce more!",
         backgroundColor: AppColors.mainColor,
         colorText: Colors.white,
       );
-
-      return 1;
-    } else if (quantity > 20) {
+      return 0;
+    } else if ((_inCartItems + quantity) > 10) {
       Get.snackbar(
         "Item count",
-        "You can't add more!",
+        "You can only add up to ${10 - _inCartItems} more products ",
         backgroundColor: AppColors.mainColor,
         colorText: Colors.white,
       );
-      return 20;
+      return 10 - _inCartItems;
     } else {
       return quantity;
     }
   }
 
-  void initialProduct(CartController cart) {
+  void initialProduct(ProductModel product, CartController cart) {
     _quantity = 0;
     _inCartItems = 0;
     _cart = cart;
+    var exist = false;
+    exist = _cart.existedInCart(product);
+    //print("exist or not: " + exist.toString());
+
+    if (exist) {
+      _inCartItems = _cart.getQuantity(product);
+    }
+    //print("the quantity in cart: " + _inCartItems.toString());
   }
 
   void addItem(ProductModel product) {
+    //if (_quantity > 0) {
     _cart.addItem(product, _quantity);
+    _quantity = 0;
+    _inCartItems = _cart.getQuantity(product);
+    _cart.items.forEach((key, value) {
+      // print("id " +
+      //     value.id.toString() +
+      //     " quantity " +
+      //     value.quantity.toString());
+    });
+    // } else {
+    //  Get.snackbar("Item count", "You should at least add an item in the cart");
+    //}
+    update();
+  }
+
+  int get totalItems {
+    return _cart.totalItems;
   }
 }
