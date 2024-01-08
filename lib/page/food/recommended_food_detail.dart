@@ -10,6 +10,7 @@ import 'package:food_app/utils/dimension.dart';
 import 'package:food_app/widget/app_icon.dart';
 import 'package:food_app/widget/big_text.dart';
 import 'package:food_app/widget/expandable_text_widget.dart';
+import 'package:food_app/widget/small_text.dart';
 import 'package:get/get.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
@@ -42,36 +43,31 @@ class RecommendedFoodDetail extends StatelessWidget {
                       return Stack(
                         children: [
                           GestureDetector(
-                              onTap: () {
-                                Get.to(() => CartPage());
-                              },
-                              child:
-                                  AppIcon(icon: Icons.shopping_cart_outlined)),
+                            onTap: () {
+                              Get.to(() => CartPage());
+                            },
+                            child: AppIcon(icon: Icons.shopping_cart_outlined),
+                          ),
                           Get.find<PopularProductController>().totalItems >= 1
                               ? Positioned(
-                                  top: 0,
-                                  right: 0,
-                                  child: AppIcon(
-                                    icon: Icons.circle,
-                                    size: 18,
-                                    iconColor: Colors.transparent,
-                                    backgroundColor: AppColors.mainColor,
+                                  top: 1,
+                                  right: 1,
+                                  child: Container(
+                                    padding: EdgeInsets.all(2.5),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppColors.mainColor,
+                                    ),
+                                    child: SmallText(
+                                      text: Get.find<PopularProductController>()
+                                          .totalItems
+                                          .toString(),
+                                      size: 10,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 )
                               : Container(),
-                          Get.find<PopularProductController>().totalItems >= 1
-                              ? Positioned(
-                                  right: 3,
-                                  top: 0,
-                                  child: BigText(
-                                    text: Get.find<PopularProductController>()
-                                        .totalItems
-                                        .toString(),
-                                    size: 12,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              : Container()
                         ],
                       );
                     },
@@ -188,8 +184,8 @@ class RecommendedFoodDetail extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.only(
-                          top: Dimensions.height20,
-                          bottom: Dimensions.width20,
+                          top: Dimensions.height15,
+                          bottom: Dimensions.width15,
                           left: Dimensions.width20,
                           right: Dimensions.width20),
                       decoration: BoxDecoration(
@@ -208,8 +204,8 @@ class RecommendedFoodDetail extends StatelessWidget {
                       },
                       child: Container(
                         padding: EdgeInsets.only(
-                          top: Dimensions.height20,
-                          bottom: Dimensions.height20,
+                          top: Dimensions.height15,
+                          bottom: Dimensions.height15,
                           left: Dimensions.width20,
                           right: Dimensions.width20,
                         ),
