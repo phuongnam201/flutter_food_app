@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/controller/cart_controller.dart';
 import 'package:food_app/controller/popular_product_controller.dart';
+import 'package:food_app/page/cart/cart_page.dart';
 import 'package:food_app/page/home/main_food_page.dart';
 import 'package:food_app/utils/app_constants.dart';
 import 'package:food_app/utils/colors.dart';
@@ -24,7 +25,8 @@ class PopularFoodDetail extends StatelessWidget {
         Get.find<PopularProductController>().popularProductList[pageId];
     Get.find<PopularProductController>()
         .initialProduct(product, Get.find<CartController>());
-    //print(product.id!);
+
+    //print(product.stars.runtimeType);
     //print(product.price.runtimeType);
     return Scaffold(
         body: Stack(
@@ -61,7 +63,12 @@ class PopularFoodDetail extends StatelessWidget {
                     builder: (controller) {
                       return Stack(
                         children: [
-                          AppIcon(icon: Icons.shopping_cart_outlined),
+                          GestureDetector(
+                              onTap: () {
+                                Get.to(() => CartPage());
+                              },
+                              child:
+                                  AppIcon(icon: Icons.shopping_cart_outlined)),
                           Get.find<PopularProductController>().totalItems >= 1
                               ? Positioned(
                                   top: 0,
@@ -119,6 +126,7 @@ class PopularFoodDetail extends StatelessWidget {
                     AppColumn(
                       text: product.name!,
                       price: product.price!.toString(),
+                      rate: double.parse(product.stars.toString()),
                     ),
                     SizedBox(
                       height: Dimensions.height20,

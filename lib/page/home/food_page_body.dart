@@ -1,9 +1,10 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:food_app/controller/popular_product_controller.dart';
 import 'package:food_app/controller/recommended_product_controller.dart';
 import 'package:food_app/models/product_model.dart';
-import 'package:food_app/page/home/food/popular_food_detail.dart';
+import 'package:food_app/page/food/popular_food_detail.dart';
 import 'package:food_app/routes/route_helper.dart';
 import 'package:food_app/utils/app_constants.dart';
 import 'package:food_app/utils/colors.dart';
@@ -12,6 +13,7 @@ import 'package:food_app/widget/big_text.dart';
 import 'package:food_app/widget/icon_and_text_widget.dart';
 import 'package:food_app/widget/small_text.dart';
 import 'package:get/get.dart';
+import 'package:rate_in_stars/rate_in_stars.dart';
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({Key? key}) : super(key: key);
@@ -192,8 +194,22 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                         text: recommendedProducts
                                             .recommendedProductList[index]
                                             .name!),
-                                    SmallText(
-                                        text: "With VietNam charactersistics"),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        RatingStars(
+                                          rating: double.parse(
+                                              recommendedProducts
+                                                  .recommendedProductList[index]
+                                                  .stars
+                                                  .toString()),
+                                          editable: false,
+                                          iconSize: Dimensions.iconSize16,
+                                          color: AppColors.mainColor,
+                                        ),
+                                      ],
+                                    ),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
@@ -329,28 +345,42 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         height: Dimensions.height10,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Wrap(
-                            children: List.generate(5, (index) {
-                              return Icon(
-                                Icons.star,
-                                color: AppColors.mainColor,
-                                size: Dimensions.iconSize16,
-                              );
-                            }),
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  RatingStars(
+                                    rating: double.parse(
+                                        popularProduct.stars.toString()),
+                                    editable: false,
+                                    iconSize: Dimensions.iconSize16,
+                                    color: AppColors.mainColor,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          SmallText(text: '5'),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          SmallText(text: '100'),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          SmallText(text: 'Comments'),
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  SmallText(text: '100'),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  SmallText(text: 'Comments'),
+                                ],
+                              )
+                            ],
+                          )
                         ],
                       ),
                       SizedBox(

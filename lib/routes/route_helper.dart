@@ -1,5 +1,5 @@
-import 'package:food_app/page/home/food/popular_food_detail.dart';
-import 'package:food_app/page/home/food/recommended_food_detail.dart';
+import 'package:food_app/page/food/popular_food_detail.dart';
+import 'package:food_app/page/food/recommended_food_detail.dart';
 import 'package:food_app/page/home/main_food_page.dart';
 import 'package:get/get.dart';
 
