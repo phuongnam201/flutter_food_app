@@ -17,23 +17,19 @@ class CartController extends GetxController {
 
   void addItem(ProductModel product, int quantity) {
     var totalQuantity = 0;
-    if (quantity < 1) {
-      Get.snackbar("Item count", "You should add at least 1 item to the cart",
-          margin: EdgeInsets.all(5),
-          backgroundColor: AppColors.mainColor,
-          colorText: Colors.white);
-    }
 
     if (_items.containsKey(product.id!)) {
       _items.update(product.id!, (value) {
         totalQuantity = value.quantity! + quantity;
-        // print("so luong dang co trong gio hàng: " + value.quantity.toString());
-        // print("so luong moi: " + quantity.toString());
-        // print("total item id ${product.id!} in cart is " +
-        //     totalQuantity.toString());
 
-        // Hạn chế số lượng tối đa là 10
-        if (totalQuantity >= 10) {
+        if (totalQuantity <= 0) {
+          Get.snackbar("Item count", "You can't reduce more",
+              margin: EdgeInsets.all(5),
+              backgroundColor: AppColors.mainColor,
+              colorText: Colors.white);
+
+          totalQuantity = 1;
+        } else if (totalQuantity > 10) {
           Get.snackbar("Item count", "The maximum quantity is 10",
               margin: EdgeInsets.all(5),
               backgroundColor: AppColors.mainColor,
@@ -53,13 +49,7 @@ class CartController extends GetxController {
         );
       });
 
-      if (totalQuantity < 1) {
-        Get.snackbar("Item count", "You can't reduce more",
-            margin: EdgeInsets.all(5),
-            backgroundColor: AppColors.mainColor,
-            colorText: Colors.white);
-        totalQuantity = 1;
-      }
+      update();
     } else {
       if (quantity > 0 && quantity <= 10) {
         _items.putIfAbsent(product.id!, () {
@@ -80,8 +70,8 @@ class CartController extends GetxController {
             backgroundColor: AppColors.mainColor,
             colorText: Colors.white);
       }
+      update();
     }
-    update();
   }
 
   void deleteItem(ProductModel product) {
@@ -122,5 +112,14 @@ class CartController extends GetxController {
     return _items.entries.map((e) {
       return e.value;
     }).toList();
+  }
+
+  int get totalAmount {
+    var total = 0;
+
+    _items.forEach((key, value) {
+      total += value.quantity! * value.price!;
+    });
+    return total;
   }
 }
