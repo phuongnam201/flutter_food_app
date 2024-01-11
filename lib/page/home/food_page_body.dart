@@ -148,7 +148,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: NetworkImage(AppConstants.BASE_URL +
-                                    "/uploads/" +
+                                    AppConstants.UPLOADS +
                                     recommendedProducts
                                         .recommendedProductList[index].img!),
                               ),
@@ -298,7 +298,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(AppConstants.BASE_URL +
-                        "/uploads/" +
+                        AppConstants.UPLOADS +
                         popularProduct.img!),
                   )),
             ),
