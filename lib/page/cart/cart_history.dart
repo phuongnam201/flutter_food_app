@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:food_app/controller/cart_controller.dart';
+import 'package:food_app/models/cart_model.dart';
 import 'package:food_app/utils/app_constants.dart';
 import 'package:food_app/utils/colors.dart';
 import 'package:food_app/utils/dimension.dart';
@@ -26,11 +29,15 @@ class CartHistory extends StatelessWidget {
       }
     }
 
-    List<int> cartOrderTimeToList() {
+    List<int> cartItemPerOrderToList() {
       return cartItemsPerOrder.entries.map((e) => e.value).toList();
     }
 
-    List<int> itemsPerOrder = cartOrderTimeToList();
+    List<String> cartOrderTimeToList() {
+      return cartItemsPerOrder.entries.map((e) => e.key).toList();
+    }
+
+    List<int> itemsPerOrder = cartItemPerOrderToList();
 
     var listCounter = 0;
 
@@ -158,22 +165,59 @@ class CartHistory extends StatelessWidget {
                                           color: AppColors.titleColor,
                                           size: Dimensions.font16,
                                         ),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              top: 5,
-                                              bottom: 5,
-                                              left: 10,
-                                              right: 10),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                                Dimensions.radius10),
-                                            border: Border.all(
-                                                width: 1,
-                                                color: AppColors.mainColor),
-                                          ),
-                                          child: SmallText(
-                                            text: "detail",
-                                            color: AppColors.mainColor,
+                                        GestureDetector(
+                                          onTap: () {
+                                            var orderTime =
+                                                cartOrderTimeToList();
+                                            Map<int, CartModel> moreOrder = {};
+                                            for (int j = 0;
+                                                j < getCartHistoryList.length;
+                                                j++) {
+                                              if (getCartHistoryList[j].time ==
+                                                  orderTime[i]) {
+                                                print("My order is: " +
+                                                    getCartHistoryList[j]
+                                                        .product!
+                                                        .name
+                                                        .toString());
+                                                print("Product info is " +
+                                                    jsonEncode(
+                                                        getCartHistoryList[j]));
+
+                                                // moreOrder.putIfAbsent(
+                                                //     getCartHistoryList[j].id!,
+                                                //     () => CartModel.fromJson(
+                                                //         jsonDecode(jsonEncode(
+                                                //             getCartHistoryList[
+                                                //                 j]))));
+                                              }
+
+                                              // Get.find<CartController>()
+                                              //     .setItems = moreOrder;
+                                              // Get.find<CartController>()
+                                              //     .addToCartList();
+                                            }
+                                            // print("order time: " +
+                                            //     orderTime[i].toString());
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.only(
+                                                top: 5,
+                                                bottom: 5,
+                                                left: 10,
+                                                right: 10),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      Dimensions.radius10),
+                                              border: Border.all(
+                                                  width: 1,
+                                                  color: AppColors.mainColor),
+                                            ),
+                                            child: SmallText(
+                                              text: "detail",
+                                              color: AppColors.mainColor,
+                                            ),
                                           ),
                                         ),
                                       ],

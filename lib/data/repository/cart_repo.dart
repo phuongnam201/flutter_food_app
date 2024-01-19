@@ -36,7 +36,8 @@ class CartRepo {
       //print("inside cart" + carts.toString());
     }
     List<CartModel> cartList = [];
-
+    // sharedPreferences.remove(AppConstants.CART_LIST);
+    // sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
     carts.forEach((element) {
       cartList.add(CartModel.fromJson(jsonDecode(element)));
     });
@@ -61,6 +62,7 @@ class CartRepo {
       cartHistory =
           sharedPreferences.getStringList(AppConstants.CART_HISTORY_LIST)!;
     }
+
     for (int i = 0; i < cart.length; i++) {
       print("history list" + cart[i].toString());
       cartHistory.add(cart[i]);
@@ -86,29 +88,28 @@ class CartRepo {
   // }
 
   void removeItemsCart(int id) {
-    print("id received: " + id.toString());
+    //print("id received: " + id.toString());
     List<String>? cartList =
         sharedPreferences.getStringList(AppConstants.CART_LIST);
 
     if (cartList != null) {
-      // Tìm vị trí của phần tử có id trong danh sách
+      // find id
       int indexToRemove = cartList.indexWhere((element) {
         CartModel cartModel = CartModel.fromJson(jsonDecode(element));
         return cartModel.id == id;
       });
 
       if (indexToRemove != -1) {
-        // Nếu tìm thấy phần tử có id, thì xóa nó khỏi danh sách
+        // delete
         cartList.removeAt(indexToRemove);
 
         List<String> updatedCartList = [];
 
-        // Cập nhật danh sách cart
+        // update list
         cartList.forEach((element) {
           updatedCartList.add(jsonEncode(element));
         });
 
-        // Lưu trữ lại danh sách cart sau khi xóa item
         sharedPreferences.setStringList(
             AppConstants.CART_LIST, updatedCartList);
         print("Item with id $id has been removed.");

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:food_app/data/api/repository/cart_repo.dart';
+import 'package:food_app/data/repository/cart_repo.dart';
 import 'package:food_app/models/cart_model.dart';
 import 'package:food_app/models/product_model.dart';
 import 'package:food_app/utils/colors.dart';

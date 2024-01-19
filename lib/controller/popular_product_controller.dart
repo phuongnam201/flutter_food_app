@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/controller/cart_controller.dart';
-import 'package:food_app/data/api/repository/popular_product_repo.dart';
+import 'package:food_app/data/repository/popular_product_repo.dart';
 import 'package:food_app/models/cart_model.dart';
 import 'package:food_app/models/product_model.dart';
 import 'package:food_app/utils/colors.dart';
