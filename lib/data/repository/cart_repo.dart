@@ -82,11 +82,6 @@ class CartRepo {
     sharedPreferences.remove(AppConstants.CART_LIST);
   }
 
-  // void removeCartHistory() {
-  //   cartHistory = [];
-  //   sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
-  // }
-
   void removeItemsCart(int id) {
     //print("id received: " + id.toString());
     List<String>? cartList =
@@ -119,5 +114,9 @@ class CartRepo {
     } else {
       print("CartList is null.");
     }
+  }
+
+  void clearCartHistory() {
+    sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
   }
 }

@@ -22,6 +22,8 @@ class Product {
     _offset = json['offset'];
     if (json['products'] != null) {
       _products = <ProductModel>[];
+
+      //for remake api: json['products']['data'].forEach((v)
       json['products'].forEach((v) {
         _products!.add(ProductModel.fromJson(v));
       });

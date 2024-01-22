@@ -9,6 +9,7 @@ import 'package:food_app/routes/route_helper.dart';
 import 'package:food_app/utils/app_constants.dart';
 import 'package:food_app/utils/colors.dart';
 import 'package:food_app/utils/dimension.dart';
+import 'package:food_app/widget/app_icon.dart';
 import 'package:food_app/widget/big_text.dart';
 import 'package:food_app/widget/icon_and_text_widget.dart';
 import 'package:food_app/widget/small_text.dart';
@@ -214,7 +215,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                     ),
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         IconAndTextWidget(
                                           icon: Icons.attach_money_rounded,
@@ -226,7 +227,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                         ),
                                         IconAndTextWidget(
                                           icon: Icons.location_on,
-                                          text: "1.7km",
+                                          text: "1.8km",
                                           iconColor: AppColors.mainColor,
                                         ),
                                         IconAndTextWidget(

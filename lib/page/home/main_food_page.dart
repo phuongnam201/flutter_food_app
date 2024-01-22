@@ -23,7 +23,11 @@ class _MainFoodPageState extends State<MainFoodPage> {
 
   @override
   Widget build(BuildContext context) {
+    //height of screen
     print("current height: " + MediaQuery.of(context).size.height.toString());
+    //witdh
+    print("current width: " + MediaQuery.of(context).size.width.toString());
+
     return RefreshIndicator(
         child: Column(
           children: [

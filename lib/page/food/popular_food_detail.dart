@@ -15,6 +15,8 @@ import 'package:food_app/widget/icon_and_text_widget.dart';
 import 'package:food_app/widget/small_text.dart';
 import 'package:get/get.dart';
 
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+
 class PopularFoodDetail extends StatelessWidget {
   int pageId;
   String page;
@@ -137,10 +139,15 @@ class PopularFoodDetail extends StatelessWidget {
                     Expanded(
                       child: SingleChildScrollView(
                         child: ExpandableTextWidget(
-                          text: product.description!,
+                          text: product.description!.toString(),
                         ),
                       ),
                     )
+                    // Expanded(
+                    //   child: SingleChildScrollView(
+                    //     child: HtmlWidget(product.description!),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
