@@ -55,7 +55,7 @@ class AccountPage extends StatelessWidget {
                                       size: Dimensions.height10 * 5,
                                     ),
                                     bigText: BigText(
-                                        text: userController.userModel.name
+                                        text: userController.userModel!.name
                                             .toString())),
                                 SizedBox(
                                   width: Dimensions.height10,
@@ -70,7 +70,7 @@ class AccountPage extends StatelessWidget {
                                       size: Dimensions.height10 * 5,
                                     ),
                                     bigText: BigText(
-                                        text: userController.userModel.phone
+                                        text: userController.userModel!.phone
                                             .toString())),
                                 SizedBox(
                                   width: Dimensions.height10,
@@ -85,7 +85,7 @@ class AccountPage extends StatelessWidget {
                                       size: Dimensions.height10 * 5,
                                     ),
                                     bigText: BigText(
-                                        text: userController.userModel.email
+                                        text: userController.userModel!.email
                                             .toString())),
                                 SizedBox(
                                   width: Dimensions.height10,
