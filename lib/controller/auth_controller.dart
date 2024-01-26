@@ -1,7 +1,6 @@
 import 'package:food_app/data/repository/auth_repo.dart';
 import 'package:food_app/models/response_model.dart';
 import 'package:food_app/models/signup_body_model.dart';
-import 'package:food_app/utils/app_constants.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController implements GetxService {

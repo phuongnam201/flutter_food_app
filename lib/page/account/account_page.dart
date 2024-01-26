@@ -55,8 +55,8 @@ class AccountPage extends StatelessWidget {
                                       size: Dimensions.height10 * 5,
                                     ),
                                     bigText: BigText(
-                                        text: userController.userModel!.name
-                                            .toString())),
+                                        text: userController.userModel?.name ??
+                                            "Null".toString())),
                                 SizedBox(
                                   width: Dimensions.height10,
                                 ),
@@ -70,8 +70,8 @@ class AccountPage extends StatelessWidget {
                                       size: Dimensions.height10 * 5,
                                     ),
                                     bigText: BigText(
-                                        text: userController.userModel!.phone
-                                            .toString())),
+                                        text: userController.userModel?.phone ??
+                                            "Null")),
                                 SizedBox(
                                   width: Dimensions.height10,
                                 ),
@@ -85,8 +85,8 @@ class AccountPage extends StatelessWidget {
                                       size: Dimensions.height10 * 5,
                                     ),
                                     bigText: BigText(
-                                        text: userController.userModel!.email
-                                            .toString())),
+                                        text: userController.userModel?.email ??
+                                            "Null")),
                                 SizedBox(
                                   width: Dimensions.height10,
                                 ),
@@ -149,8 +149,57 @@ class AccountPage extends StatelessWidget {
                   )
                 : CustomLoader())
             : Container(
-                child: Center(
-                  child: Text("You have to login before"),
+                color: Colors.white,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Container(
+                        width: double.maxFinite,
+                        height: Dimensions.height20 * 7,
+                        margin: EdgeInsets.only(
+                          left: Dimensions.width20,
+                          right: Dimensions.width20,
+                        ),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image:
+                                AssetImage("assets/image/signintocontinue.png"),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: Dimensions.height15,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(RouteHelper.getSignIn());
+                      },
+                      child: Center(
+                        child: Container(
+                          width: double.maxFinite,
+                          height: Dimensions.height20 * 3,
+                          margin: EdgeInsets.only(
+                            left: Dimensions.width20,
+                            right: Dimensions.width20,
+                          ),
+                          decoration: BoxDecoration(
+                              color: AppColors.mainColor,
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius15)),
+                          child: Center(
+                            child: BigText(
+                              text: "Sign in",
+                              color: Colors.white,
+                              size: Dimensions.font20,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               );
       }),

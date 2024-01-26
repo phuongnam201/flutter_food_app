@@ -1,13 +1,8 @@
 import 'package:food_app/controller/cart_controller.dart';
 import 'package:food_app/controller/popular_product_controller.dart';
 import 'package:food_app/controller/recommended_product_controller.dart';
-import 'package:food_app/page/cart/cart_page.dart';
-import 'package:food_app/page/food/popular_food_detail.dart';
-import 'package:food_app/page/food/recommended_food_detail.dart';
-import 'package:food_app/page/home/food_page_body.dart';
-import 'package:food_app/page/home/main_food_page.dart';
 import 'package:flutter/material.dart';
-import 'package:food_app/page/splash/splash_page.dart';
+
 import 'package:food_app/routes/route_helper.dart';
 import 'package:get/get.dart';
 
