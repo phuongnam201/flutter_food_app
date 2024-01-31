@@ -33,7 +33,7 @@ class PopularProductController extends GetxController {
       //print(_popularProductList);
       update();
     } else {
-      print("error");
+      print("error at get popular controller: " + response.toString());
     }
   }
 

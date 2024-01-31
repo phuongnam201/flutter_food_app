@@ -34,7 +34,9 @@ class ApiClient extends GetConnect implements GetxService {
       //print("content form get method:" + response.toString());
       return response;
     } catch (e) {
+      //print("false: " + e.toString());
       return Response(statusCode: 1, statusText: e.toString());
+
     }
   }
 
