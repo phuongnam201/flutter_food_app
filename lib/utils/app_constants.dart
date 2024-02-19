@@ -11,7 +11,13 @@ class AppConstants {
   static const String REGISTRATION_URI = "/api/v1/auth/register";
   static const String LOGIN_URI = "/api/v1/auth/login";
   static const String USER_INFO_URI = "/api/v1/customer/info";
+
+  //google map and address
   static const String GEOCODE_URI = "/api/v1/config/geocode-api";
+  static const String USER_ADDRESS = "/user_address";
+
+  static const String ADD_USER_ADDRESS = "/api/v1/customer/address/add";
+  static const String ADDRESS_LIST_URI = "/api/v1/customer/address/list";
 
   static const String UPLOADS = "/uploads/";
   static const String TOKEN = "";

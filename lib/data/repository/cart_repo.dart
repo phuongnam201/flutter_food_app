@@ -12,8 +12,8 @@ class CartRepo {
 
   void addToCartList(List<CartModel> cartList) {
     // print("cart list: " + cartList.toString());
-    // sharedPreferences.remove(AppConstants.CART_LIST);
-    // sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
+    sharedPreferences.remove(AppConstants.CART_LIST);
+    sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
 
     var time = DateTime.now().toString();
     cart = [];
@@ -36,8 +36,8 @@ class CartRepo {
       //print("inside cart" + carts.toString());
     }
     List<CartModel> cartList = [];
-    // sharedPreferences.remove(AppConstants.CART_LIST);
-    // sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
+    //sharedPreferences.remove(AppConstants.CART_LIST);
+    //sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
     carts.forEach((element) {
       cartList.add(CartModel.fromJson(jsonDecode(element)));
     });
