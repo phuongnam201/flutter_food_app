@@ -24,41 +24,71 @@ class LocationController extends GetxController implements GetxService {
   Map get getAddress => _getAddress;
 
   late GoogleMapController _mapController;
-  bool _updateAddressData=true;
-  bool _changeAddress=true;
+  bool _updateAddressData = true;
+  bool _changeAddress = true;
 
-  void setMapController(GoogleMapController mapController){
+  void setMapController(GoogleMapController mapController) {
     _mapController = mapController;
   }
 
   void updatePosition(CameraPosition position, bool fromAddress) async {
-    if(_updateAddressData){
-      _loading=true;
+    if (_updateAddressData) {
+      _loading = true;
       update();
-      try{
-        if(fromAddress){
-          _position=Position(longitude: position.target.longitude, latitude: position.target.latitude, timestamp: DateTime.now(), accuracy: 1, altitude: 1, heading: 1, speed: 1, speedAccuracy: 1, altitudeAccuracy: 1, headingAccuracy: 1);
-        }else{
-          _pickPosition=Position(longitude: position.target.longitude, latitude: position.target.latitude, timestamp: DateTime.now(), accuracy: 1, altitude: 1, heading: 1, speed: 1, speedAccuracy: 1, altitudeAccuracy: 1, headingAccuracy: 1);
+      try {
+        if (fromAddress) {
+          _position = Position(
+              longitude: position.target.longitude,
+              latitude: position.target.latitude,
+              timestamp: DateTime.now(),
+              accuracy: 1,
+              altitude: 1,
+              heading: 1,
+              speed: 1,
+              speedAccuracy: 1,
+              altitudeAccuracy: 1,
+              headingAccuracy: 1);
+        } else {
+          _pickPosition = Position(
+              longitude: position.target.longitude,
+              latitude: position.target.latitude,
+              timestamp: DateTime.now(),
+              accuracy: 1,
+              altitude: 1,
+              heading: 1,
+              speed: 1,
+              speedAccuracy: 1,
+              altitudeAccuracy: 1,
+              headingAccuracy: 1);
         }
 
-        if(_changeAddress){
+        if (_changeAddress) {
+          print("lat:" + position.target.latitude.toString());
+          print("lng:" + position.target.latitude.toString());
           String _address = await getAddressfromGeocode(
-            LatLng(position.target.latitude, position.target.longitude)
-          );
+              LatLng(position.target.latitude, position.target.longitude));
+
+          //print("address detail: " + _address);
         }
-      }catch(e){
+      } catch (e) {
         print(e);
       }
     }
   }
 
-  String getAddressfromGeocode(LatLng latlng) {
+  Future<String> getAddressfromGeocode(LatLng latlng) async {
     String _address = "Unknow location found";
-   // Response response = await locationRepo.getAddressfromGeocode();
+    Response response = await locationRepo.getAddressfromGeocode(latlng);
+    //print(response.body.toString());
 
+    if (response.body["status"] == 'OK') {
+      //print("succes from geocode");
+      _address = response.body["results"][0]['formatted_address'].toString();
+      //print("address from location_controller:" + _address);
+    } else {
+      print("error getting the google api");
+    }
+    //print(_address);
     return _address;
   }
-
-
 }

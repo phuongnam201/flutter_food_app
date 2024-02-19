@@ -1,7 +1,7 @@
 class AppConstants {
   static const APP_NAME = "FOOD_app";
   static const APP_VERSION = 1;
-  static const String BASE_URL = "http://45.76.147.90/shopping-app/public";
+  static const String BASE_URL = "http://167.172.76.153/shopping-app/public";
   //if the api online doesn't work.
   //static const String BASE_URL = "http://localhost/shopping-app/public";
   static const String POPULAR_PRODUCT_URI = "/api/v1/products/popular";
@@ -11,6 +11,7 @@ class AppConstants {
   static const String REGISTRATION_URI = "/api/v1/auth/register";
   static const String LOGIN_URI = "/api/v1/auth/login";
   static const String USER_INFO_URI = "/api/v1/customer/info";
+  static const String GEOCODE_URI = "/api/v1/config/geocode-api";
 
   static const String UPLOADS = "/uploads/";
   static const String TOKEN = "";
