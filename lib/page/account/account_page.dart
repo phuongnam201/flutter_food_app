@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/base/custom_loader.dart';
 import 'package:food_app/controller/auth_controller.dart';
 import 'package:food_app/controller/cart_controller.dart';
+import 'package:food_app/controller/location_controller.dart';
 import 'package:food_app/controller/user_controller.dart';
 import 'package:food_app/routes/route_helper.dart';
 import 'package:food_app/utils/colors.dart';
@@ -91,16 +92,47 @@ class AccountPage extends StatelessWidget {
                                   width: Dimensions.height10,
                                 ),
                                 //address
-                                AccountWidget(
-                                    appIcon: AppIcon(
-                                      icon: Icons.location_on,
-                                      backgroundColor: AppColors.mainColor,
-                                      iconColor: Colors.white,
-                                      iconSize: Dimensions.height10 * 5 / 2,
-                                      size: Dimensions.height10 * 5,
-                                    ),
-                                    bigText:
-                                        BigText(text: "fill your address")),
+                                GetBuilder<LocationController>(
+                                    builder: (locationController) {
+                                  if (_userLoggedIn &&
+                                      locationController.addressList.isEmpty) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Get.toNamed(RouteHelper.addAddress);
+                                      },
+                                      child: AccountWidget(
+                                          appIcon: AppIcon(
+                                            icon: Icons.location_on,
+                                            backgroundColor:
+                                                AppColors.mainColor,
+                                            iconColor: Colors.white,
+                                            iconSize:
+                                                Dimensions.height10 * 5 / 2,
+                                            size: Dimensions.height10 * 5,
+                                          ),
+                                          bigText: BigText(
+                                              text: "fill your address")),
+                                    );
+                                  } else {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Get.toNamed(RouteHelper.addAddress);
+                                      },
+                                      child: AccountWidget(
+                                          appIcon: AppIcon(
+                                            icon: Icons.location_on,
+                                            backgroundColor:
+                                                AppColors.mainColor,
+                                            iconColor: Colors.white,
+                                            iconSize:
+                                                Dimensions.height10 * 5 / 2,
+                                            size: Dimensions.height10 * 5,
+                                          ),
+                                          bigText:
+                                              BigText(text: "Your address")),
+                                    );
+                                  }
+                                }),
                                 SizedBox(
                                   width: Dimensions.height10,
                                 ),

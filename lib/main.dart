@@ -4,6 +4,7 @@ import 'package:food_app/controller/recommended_product_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:food_app/routes/route_helper.dart';
+import 'package:food_app/utils/colors.dart';
 import 'package:get/get.dart';
 
 import 'helper/dependencies.dart' as dep;
@@ -31,8 +32,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
+            primaryColor: AppColors.mainColor,
+            fontFamily: "Lato",
           ),
           //home: MainFoodPage(),
           initialRoute: RouteHelper.getSplashPage(),

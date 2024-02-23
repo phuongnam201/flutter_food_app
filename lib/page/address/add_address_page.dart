@@ -5,6 +5,8 @@ import 'package:food_app/controller/auth_controller.dart';
 import 'package:food_app/controller/location_controller.dart';
 import 'package:food_app/controller/user_controller.dart';
 import 'package:food_app/models/address_model.dart';
+import 'package:food_app/page/address/pick_address_map.dart';
+import 'package:food_app/routes/route_helper.dart';
 import 'package:food_app/utils/colors.dart';
 import 'package:food_app/utils/dimension.dart';
 import 'package:food_app/widget/app_text_field.dart';
@@ -40,6 +42,13 @@ class _AddAddressPageState extends State<AddAddressPage> {
       Get.find<UserController>().getUserInfo();
     }
     if (Get.find<LocationController>().addressList.isNotEmpty) {
+      if (Get.find<LocationController>().getUserAddressFromLocalStorage() ==
+          "") {
+        Get.find<LocationController>()
+            .saveUserAddress(Get.find<LocationController>().addressList.last);
+      }
+
+      Get.find<LocationController>().getUserAddress();
       _cameraPosition = CameraPosition(
           target: LatLng(
               double.parse(
@@ -97,10 +106,20 @@ class _AddAddressPageState extends State<AddAddressPage> {
                           GoogleMap(
                             initialCameraPosition: CameraPosition(
                                 target: _initialPosition, zoom: 17),
+                            onTap: (latlng) {
+                              Get.toNamed(RouteHelper.getPickAddressPage(),
+                                  arguments: PickAddressMap(
+                                    fromSignup: false,
+                                    fromAddress: true,
+                                    googleMapController:
+                                        locationController.mapController,
+                                  ));
+                            },
                             zoomControlsEnabled: false,
                             compassEnabled: false,
                             indoorViewEnabled: true,
                             mapToolbarEnabled: false,
+                            //myLocationEnabled: true,
                             onCameraIdle: () {
                               locationController.updatePosition(
                                   _cameraPosition, true);
@@ -259,7 +278,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                             .addAddress(_addressModel)
                             .then((response) {
                           if (response.isSuccess) {
-                            Get.back();
+                            //Get.back();
                             Get.snackbar("Address", "Added Successfully");
                           } else {
                             Get.snackbar("Address", "Couldn't save address");
