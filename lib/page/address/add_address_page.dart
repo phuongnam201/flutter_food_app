@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:food_app/controller/auth_controller.dart';
@@ -11,7 +10,7 @@ import 'package:food_app/utils/colors.dart';
 import 'package:food_app/utils/dimension.dart';
 import 'package:food_app/widget/app_text_field.dart';
 import 'package:food_app/widget/big_text.dart';
-import 'package:geolocator/geolocator.dart';
+
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -130,29 +129,30 @@ class _AddAddressPageState extends State<AddAddressPage> {
                               locationController.setMapController(controller);
                             },
                           ),
-                          Positioned(
-                            bottom: 16.0,
-                            right: 16.0,
-                            child: FloatingActionButton(
-                              onPressed: () async {
-                                Position curr_position =
-                                    await locationController
-                                        .determinePosition();
-                                print("current lat: " +
-                                    curr_position.latitude.toString());
-                                print("current lng: " +
-                                    curr_position.longitude.toString());
-                                _cameraPosition = CameraPosition(
-                                    target: LatLng(curr_position.latitude,
-                                        curr_position.longitude),
-                                    zoom: 17);
-                                locationController.updatePosition(
-                                    _cameraPosition, true);
-                              },
-                              tooltip: 'Get My Location',
-                              child: Icon(Icons.location_searching_sharp),
-                            ),
-                          ),
+                          /**get your location */
+                          // Positioned(
+                          //   bottom: 16.0,
+                          //   right: 16.0,
+                          //   child: FloatingActionButton(
+                          //     onPressed: () async {
+                          //       Position curr_position =
+                          //           await locationController
+                          //               .determinePosition();
+                          //       print("current lat: " +
+                          //           curr_position.latitude.toString());
+                          //       print("current lng: " +
+                          //           curr_position.longitude.toString());
+                          //       _cameraPosition = CameraPosition(
+                          //           target: LatLng(curr_position.latitude,
+                          //               curr_position.longitude),
+                          //           zoom: 17);
+                          //       locationController.updatePosition(
+                          //           _cameraPosition, true);
+                          //     },
+                          //     tooltip: 'Get My Location',
+                          //     child: Icon(Icons.location_searching_sharp),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

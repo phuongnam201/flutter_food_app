@@ -4,14 +4,12 @@ import 'package:food_app/controller/cart_controller.dart';
 import 'package:food_app/controller/location_controller.dart';
 import 'package:food_app/controller/popular_product_controller.dart';
 import 'package:food_app/controller/recommended_product_controller.dart';
-import 'package:food_app/page/home/main_food_page.dart';
 import 'package:food_app/routes/route_helper.dart';
 import 'package:food_app/utils/app_constants.dart';
 import 'package:food_app/utils/colors.dart';
 import 'package:food_app/utils/dimension.dart';
 import 'package:food_app/widget/app_icon.dart';
 import 'package:food_app/widget/big_text.dart';
-import 'package:food_app/widget/small_text.dart';
 import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
@@ -311,10 +309,15 @@ class CartPage extends StatelessWidget {
                       //controller.addItem(product);
                       //controller.addToHistory();
                       if (Get.find<AuthController>().userLoggedIn()) {
-                        if (Get.find<LocationController>()
-                            .addressList
-                            .isEmpty) {
-                          Get.toNamed(RouteHelper.getAddressPage());
+                        if (controller.totalItems > 0) {
+                          if (Get.find<LocationController>()
+                              .addressList
+                              .isEmpty) {
+                            Get.toNamed(RouteHelper.getAddressPage());
+                          }
+                        } else {
+                          Get.snackbar(
+                              "Ops", "You don't have anything in your cart");
                         }
                       } else {
                         Get.toNamed(RouteHelper.getSignIn());

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/base/custom_button.dart';
 import 'package:food_app/controller/location_controller.dart';
-import 'package:food_app/page/address/widget/search_location_dialogue_page.dart';
+//import 'package:food_app/page/address/widget/search_location_dialogue_page.dart';
 import 'package:food_app/routes/route_helper.dart';
 import 'package:food_app/utils/colors.dart';
 import 'package:food_app/utils/dimension.dart';
@@ -92,8 +92,7 @@ class _PickAddressMapState extends State<PickAddressMap> {
                         //         child: CircularProgressIndicator(),
                         //       ):
                         InkWell(
-                      onTap: () => Get.dialog(
-                          LocationDialogue(mapController: _mapController)),
+                      onTap: () => {},
                       child: Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: Dimensions.width10),
