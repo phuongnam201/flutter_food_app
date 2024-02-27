@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter/widgets.dart';
 import 'package:food_app/data/api/api_checker.dart';
@@ -11,7 +12,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 //import 'package:google_places_flutter/model/prediction.dart';
 
 import '../models/address_model.dart';
-//import 'package:google_maps_webservice/places.dart';
+import 'package:google_maps_webservice/places.dart';
 
 class LocationController extends GetxController implements GetxService {
   LocationRepo locationRepo;
@@ -58,7 +59,7 @@ class LocationController extends GetxController implements GetxService {
   bool _buttonDisable = true;
   bool get buttonDisable => _buttonDisable;
 
-  // List<Prediction> _predictionList = [];
+  List<Prediction> _predictionList = [];
 
   void setMapController(GoogleMapController mapController) {
     _mapController = mapController;
@@ -111,6 +112,8 @@ class LocationController extends GetxController implements GetxService {
               ? _placemark = Placemark(name: _address)
               : _pickPlacemark = Placemark(name: _address);
           print("address detail: " + _address);
+        } else {
+          _changeAddress = true;
         }
       } catch (e) {
         print(e);
@@ -167,6 +170,8 @@ class LocationController extends GetxController implements GetxService {
               ? _placemark = Placemark(name: _address)
               : _pickPlacemark = Placemark(name: _address);
           print("address detail: " + _address);
+        } else {
+          _changeAddress = true;
         }
       } catch (e) {
         print(e);
@@ -332,31 +337,62 @@ class LocationController extends GetxController implements GetxService {
     return _responseModel;
   }
 
-  // Future<List<Prediction>> searchLocation(
-  //     BuildContext context, String text) async {
-  //   if (text.isNotEmpty) {
-  //     Response response = await locationRepo.searchLocation(text);
-  //     if (response.statusCode == 200 && response.body['status'] == 'OK') {
-  //       _predictionList = [];
-  //       response.body['predictions'].forEach((prediction) =>
-  //           _predictionList.add(Prediction.fromJson(prediction)));
-  //     } else {
-  //       ApiChecker.checkApi(response);
-  //     }
-  //   }
-  //   return _predictionList;
-  // }
+  Future<List<Prediction>> searchLocation(
+      BuildContext context, String text) async {
+    if (text.isNotEmpty) {
+      Response response = await locationRepo.searchLocation(text);
+      if (response.statusCode == 200 && response.body['status'] == 'OK') {
+        _predictionList = [];
+        response.body['predictions'].forEach((prediction) =>
+            _predictionList.add(Prediction.fromJson(prediction)));
+      } else {
+        ApiChecker.checkApi(response);
+      }
+    }
+    return _predictionList;
+  }
 
-  // setLocation(
-  //     String placeID, String address, GoogleMapController mapController) async {
-  //   _loading = true;
-  //   update();
-  //   PlacesDetailsResponse detail;
-  //   Response response = await locationRepo.setLocation(placeID);
-  //   detail = PlacesDetailsResponse.fromJson(response.body);
+  setLocation(
+      String placeID, String address, GoogleMapController mapController) async {
+    _loading = true;
+    update();
+    PlacesDetailsResponse detail;
+    Response response = await locationRepo.setLocation(placeID);
+    detail = PlacesDetailsResponse.fromJson(response.body);
+    _pickPosition = Position(
+        latitude: detail.result.geometry!.location.lat,
+        longitude: detail.result.geometry!.location.lng,
+        timestamp: DateTime.now(),
+        accuracy: 1,
+        altitude: 1,
+        heading: 1,
+        speed: 1,
+        speedAccuracy: 1,
+        altitudeAccuracy: 1,
+        headingAccuracy: 1);
+
+    _pickPlacemark = Placemark(name: address);
+    _changeAddress = false;
+
+    if (!mapController.isNull) {
+      mapController
+          .animateCamera((CameraUpdate.newCameraPosition(CameraPosition(
+              target: LatLng(
+                detail.result.geometry!.location.lat,
+                detail.result.geometry!.location.lng,
+              ),
+              zoom: 17))));
+    }
+    _loading = false;
+    update();
+  }
+
+/**test method autocomplete textfield another */
+
+  // setLocation(LatLng latLng, String address) {
   //   _pickPosition = Position(
-  //       latitude: detail.result.geometry!.location.lat,
-  //       longitude: detail.result.geometry!.location.lng,
+  //       latitude: latLng.latitude,
+  //       longitude: latLng.longitude,
   //       timestamp: DateTime.now(),
   //       accuracy: 1,
   //       altitude: 1,
@@ -367,15 +403,19 @@ class LocationController extends GetxController implements GetxService {
   //       headingAccuracy: 1);
 
   //   _pickPlacemark = Placemark(name: address);
-  //   _changeAddress = false;
-  //   if (!mapController.isNull) {
-  //     mapController
-  //         .animateCamera((CameraUpdate.newCameraPosition(CameraPosition(
-  //             target: LatLng(
-  //               detail.result.geometry!.location.lat,
-  //               detail.result.geometry!.location.lng,
-  //             ),
-  //             zoom: 17))));
+  //   _changeAddress = true;
+  //   // Kiểm tra xem _mapController có khả dụng không trước khi di chuyển bản đồ
+  //   if (!_mapController.isNull) {
+  //     // Di chuyển camera đến tọa độ mới
+  //     _mapController.animateCamera(
+  //       CameraUpdate.newCameraPosition(
+  //         CameraPosition(
+  //           target: latLng,
+  //           zoom: 17, // Bạn có thể điều chỉnh mức độ zoom tùy thích
+  //         ),
+  //       ),
+  //     );
   //   }
+  //   update();
   // }
 }
