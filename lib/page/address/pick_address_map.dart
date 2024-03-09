@@ -179,7 +179,8 @@ class _PickAddressMapState extends State<PickAddressMap> {
                                       locationController.setAddAddressData();
                                     }
                                     if (widget.fromAddress) {
-                                      Get.toNamed(RouteHelper.getAddressPage());
+                                      Get.offNamed(
+                                          RouteHelper.getAddressPage());
                                     }
                                   }
                                 }
