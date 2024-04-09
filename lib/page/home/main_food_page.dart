@@ -80,7 +80,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
               child: SingleChildScrollView(
                 child: FoodPageBody(),
               ),
-            )
+            ),
           ],
         ),
         onRefresh: _loadResource);

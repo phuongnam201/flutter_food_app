@@ -24,7 +24,7 @@ class CartController extends GetxController {
       _items.update(product.id!, (value) {
         totalQuantity = value.quantity! + quantity;
 
-        if (totalQuantity <= 0) {
+        if (quantity <= 0) {
           Get.snackbar("Item count", "You can't reduce more",
               margin: EdgeInsets.all(5),
               backgroundColor: AppColors.mainColor,
@@ -38,6 +38,7 @@ class CartController extends GetxController {
               colorText: Colors.white);
           totalQuantity = 10;
         }
+        Get.snackbar("Item count", "${quantity} was added to cart");
 
         return CartModel(
           id: value.id,
@@ -151,6 +152,11 @@ class CartController extends GetxController {
     update();
   }
 
+  void addToCartList() {
+    cartRepo.addToCartList(getItems);
+    update();
+  }
+
   List<CartModel> getCartHistoryList() {
     return cartRepo.getCartHistoryList();
   }
@@ -158,5 +164,9 @@ class CartController extends GetxController {
   void clearCartHistory() {
     cartRepo.clearCartHistory();
     update();
+  }
+
+  void removeCartSharePreference() {
+    cartRepo.removeCartSharePreference();
   }
 }
