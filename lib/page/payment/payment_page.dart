@@ -131,7 +131,7 @@ class _PaymentPageState extends State<PaymentPage> {
       controllerGlobal.goBack();
       return Future.value(false);
     } else {
-      print("app exited");
+      Get.toNamed(RouteHelper.getInitial());
       return true;
       // return Get.dialog(PaymentFailedDialog(orderID: widget.orderModel.id.toString()));
     }

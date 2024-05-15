@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:food_app/controller/cart_controller.dart';
 import 'package:food_app/controller/popular_product_controller.dart';
 import 'package:food_app/controller/recommended_product_controller.dart';
@@ -117,7 +118,8 @@ class RecommendedFoodDetail extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(
                         left: Dimensions.width15, right: Dimensions.width15),
-                    child: ExpandableTextWidget(text: product.description!),
+                    //child: ExpandableTextWidget(text: product.description!),
+                    child: HtmlWidget(product.description!),
                   ),
                 ],
               ),
@@ -150,7 +152,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                           icon: Icons.remove),
                     ),
                     BigText(
-                      text: "\$ ${product.price!.toString()} " +
+                      text: "${product.price!.toString()} VND" +
                           "X " +
                           "${controller.quantity}",
                       color: AppColors.mainBlackColor,

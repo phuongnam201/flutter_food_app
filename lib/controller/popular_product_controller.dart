@@ -25,6 +25,7 @@ class PopularProductController extends GetxController {
 
   Future<void> getPopularProductList() async {
     Response response = await popularProductRepo.getPopularProductList();
+    //print("status code:" + response.body.toString());
     if (response.statusCode == 200) {
       _isLoaded = true;
       //print("Nhong se yo");

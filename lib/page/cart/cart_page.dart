@@ -21,6 +21,7 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Get.find<LocationController>().getUserAddress();
     return Scaffold(
       body: Stack(
         children: [
@@ -113,7 +114,7 @@ class CartPage extends StatelessWidget {
                                               fit: BoxFit.cover,
                                               image: NetworkImage(
                                                   AppConstants.BASE_URL +
-                                                      "/uploads/" +
+                                                      AppConstants.UPLOADS +
                                                       cartController
                                                           .getItems[index]
                                                           .img!),
@@ -312,6 +313,7 @@ class CartPage extends StatelessWidget {
                     onTap: () {
                       //controller.addItem(product);
                       //controller.addToHistory();
+                      //Get.find<LocationController>().getUserAddress();
                       if (Get.find<AuthController>().userLoggedIn()) {
                         if (controller.totalItems > 0) {
                           if (Get.find<LocationController>()

@@ -15,7 +15,7 @@ class LocationRepo {
   }
 
   String getUserAddress() {
-    return sharedPreferences.getString(AppConstants.USER_ADDRESS)!;
+    return sharedPreferences.getString(AppConstants.USER_ADDRESS) ?? "";
   }
 
   Future<Response> addAddress(AddressModel addressModel) async {

@@ -8,7 +8,12 @@ class OrderRepo {
   OrderRepo({required this.apiClient});
 
   Future<Response> placeOrder(PlaceOrderBody placeOrderBody) async {
+    print("debug at order repo:" + placeOrderBody.toJson().toString());
     return await apiClient.postData(
         AppConstants.PLACE_ORDER_URI, placeOrderBody.toJson());
+  }
+
+  Future<Response> getOrderList() async {
+    return await apiClient.getData(AppConstants.ORDER_LIST_URI);
   }
 }

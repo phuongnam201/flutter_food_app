@@ -24,8 +24,8 @@ class Product {
       _products = <ProductModel>[];
 
       //for remake api: json['products']['data'].forEach((v)
-      json['products'].forEach((v) {
-        _products!.add(ProductModel.fromJson(v));
+      json['products']['data'].forEach((v) {
+        _products.add(ProductModel.fromJson(v));
       });
     }
   }

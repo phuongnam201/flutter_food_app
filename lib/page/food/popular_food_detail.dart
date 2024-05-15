@@ -14,8 +14,7 @@ import 'package:food_app/widget/expandable_text_widget.dart';
 import 'package:food_app/widget/icon_and_text_widget.dart';
 import 'package:food_app/widget/small_text.dart';
 import 'package:get/get.dart';
-
-//import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   int pageId;
@@ -136,18 +135,18 @@ class PopularFoodDetail extends StatelessWidget {
                       height: Dimensions.height20,
                     ),
                     BigText(text: "Introduce"),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: ExpandableTextWidget(
-                          text: product.description!.toString(),
-                        ),
-                      ),
-                    )
                     // Expanded(
                     //   child: SingleChildScrollView(
-                    //     child: HtmlWidget(product.description!),
+                    //     child: ExpandableTextWidget(
+                    //       text: product.description!.toString(),
+                    //     ),
                     //   ),
                     // ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: HtmlWidget(product.description!),
+                      ),
+                    ),
                   ],
                 ),
               ),

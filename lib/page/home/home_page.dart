@@ -5,6 +5,7 @@ import 'package:food_app/page/account/account_page.dart';
 import 'package:food_app/page/auth/sign_up_page.dart';
 import 'package:food_app/page/cart/cart_history.dart';
 import 'package:food_app/page/home/main_food_page.dart';
+import 'package:food_app/page/order/order_page.dart';
 import 'package:food_app/utils/colors.dart';
 import 'package:food_app/utils/dimension.dart';
 
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   List pages = [
     MainFoodPage(),
-    SignUpPage(),
+    OrderPage(),
     CartHistory(),
     AccountPage(),
   ];
