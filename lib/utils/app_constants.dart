@@ -6,6 +6,7 @@ class AppConstants {
   static const String BASE_URL = "https://nswgaming.click/public";
   static const String POPULAR_PRODUCT_URI = "/api/v1/products/popular";
   static const String RECOMMENDED_PRODUCT_URI = "/api/v1/products/recommended";
+  static const String ALL_PRODUCT_URI = "/api/v1/products/";
 
   //auth
   static const String REGISTRATION_URI = "/api/v1/auth/register";
@@ -26,7 +27,15 @@ class AppConstants {
   //order
   static const String PLACE_ORDER_URI = '/api/v1/customer/order/place';
   static const String ORDER_LIST_URI = '/api/v1/customer/order/list';
+  static const String ORDER_DETAIL_LIST_URI =
+      '/api/v1/customer/order/ord-details-list';
+  static const String ORDER_HISTORY_LIST_URI =
+      '/api/v1/customer/order/order-history';
 
+  //search
+  static const String SEARCH_PRODUCT_URI = '/api/v1/products/search';
+
+  //variables for storage
   static const String UPLOADS = "/storage/";
   static const String TOKEN = "";
   static const String PHONE = "";

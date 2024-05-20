@@ -4,10 +4,10 @@ import 'package:food_app/utils/dimension.dart';
 
 class AppTextField extends StatelessWidget {
   final TextEditingController textController;
-  //final String hinText;
   final String labelText;
   final IconData icon;
   final bool? obscureText;
+  final ValueChanged<String>? onChanged;
 
   const AppTextField({
     super.key,
@@ -15,6 +15,7 @@ class AppTextField extends StatelessWidget {
     required this.labelText,
     required this.icon,
     this.obscureText,
+    this.onChanged,
   });
 
   @override
@@ -38,29 +39,26 @@ class AppTextField extends StatelessWidget {
             ),
             blurRadius: 10.0,
             spreadRadius: 2.0,
-          ), //BoxShadow
+          ),
           BoxShadow(
             color: Colors.white,
             offset: const Offset(0.0, 0.0),
             blurRadius: 0.0,
             spreadRadius: 0.0,
-          ), //BoxShadow
+          ),
         ],
       ),
       child: TextField(
         obscureText: obscureText ?? false,
         controller: textController,
+        onChanged: onChanged,
         decoration: InputDecoration(
           labelText: labelText,
-          //prefix
-
           prefixIcon: Icon(
             icon,
             color: AppColors.mainColor,
             size: Dimensions.iconSize16,
           ),
-
-          //enable border
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(Dimensions.radius10),
             borderSide: BorderSide(
@@ -68,8 +66,6 @@ class AppTextField extends StatelessWidget {
               color: Colors.grey,
             ),
           ),
-
-          //focus
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(Dimensions.radius10),
             borderSide: BorderSide(
@@ -77,13 +73,9 @@ class AppTextField extends StatelessWidget {
               color: AppColors.mainColor,
             ),
           ),
-
-          //border
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(Dimensions.radius10),
           ),
-
-          //label style
         ),
       ),
     );

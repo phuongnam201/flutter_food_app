@@ -7,6 +7,7 @@ import 'package:food_app/page/auth/sign_up_page.dart';
 import 'package:food_app/routes/route_helper.dart';
 import 'package:food_app/utils/colors.dart';
 import 'package:food_app/utils/dimension.dart';
+import 'package:food_app/widget/app_icon.dart';
 import 'package:food_app/widget/app_text_field.dart';
 import 'package:food_app/widget/big_text.dart';
 import 'package:get/get.dart';
@@ -56,8 +57,42 @@ class SignInPage extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        SizedBox(
-                          height: Dimensions.screenHeight * 0.05,
+                        Container(
+                          //color: Colors.amber,
+                          margin: EdgeInsets.only(top: Dimensions.height20 * 2),
+                          width: Dimensions.screenWidth * 0.9,
+                          child: Positioned(
+                            left: Dimensions.height20,
+                            top: Dimensions.height45,
+                            right: Dimensions.width20,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: AppIcon(
+                                    icon: Icons.arrow_back_ios,
+                                    iconColor: Colors.white,
+                                    iconSize: Dimensions.iconSize24,
+                                    backgroundColor: AppColors.mainColor,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(RouteHelper.getInitial());
+                                  },
+                                  child: AppIcon(
+                                    icon: Icons.home_outlined,
+                                    iconColor: Colors.white,
+                                    iconSize: Dimensions.iconSize24,
+                                    backgroundColor: AppColors.mainColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         Container(
                           height: Dimensions.screenHeight * 0.20,

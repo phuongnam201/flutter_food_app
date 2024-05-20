@@ -1,4 +1,5 @@
 import 'package:food_app/controller/cart_controller.dart';
+import 'package:food_app/controller/food_controller.dart';
 import 'package:food_app/controller/popular_product_controller.dart';
 import 'package:food_app/controller/recommended_product_controller.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ Future<void> main() async {
   await dep.init();
   /**if app has trouble store memory */
   await Get.find<PopularProductController>().getPopularProductList();
+  await Get.find<FoodController>().getAllFoodList();
   await Get.find<RecommendedProductController>().getRecommendedProductList();
 
   runApp(const MyApp());

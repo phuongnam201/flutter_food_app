@@ -50,6 +50,7 @@ class CartRepo {
       cartHistory = [];
       cartHistory =
           sharedPreferences.getStringList(AppConstants.CART_HISTORY_LIST)!;
+      print("cart history from repo 2" + cartHistory.toString());
     }
     List<CartModel> cartListHistory = [];
     cartHistory.forEach((element) =>

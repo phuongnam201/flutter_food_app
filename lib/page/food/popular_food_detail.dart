@@ -128,7 +128,7 @@ class PopularFoodDetail extends StatelessWidget {
                   children: [
                     AppColumn(
                       text: product.name!,
-                      price: product.price!.toString(),
+                      price: "₫ " + product.price!.toString(),
                       rate: double.parse(product.stars.toString()),
                     ),
                     SizedBox(

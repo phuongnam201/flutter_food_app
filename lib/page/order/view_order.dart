@@ -5,6 +5,7 @@ import 'package:food_app/controller/order_controller.dart';
 import 'package:food_app/models/order_model.dart';
 import 'package:food_app/utils/colors.dart';
 import 'package:food_app/utils/dimension.dart';
+import 'package:food_app/utils/style.dart';
 import 'package:get/get.dart';
 
 class ViewOrder extends StatelessWidget {
@@ -33,7 +34,10 @@ class ViewOrder extends StatelessWidget {
                       return InkWell(
                         onTap: () => null,
                         child: Container(
-                          margin: EdgeInsets.only(top: Dimensions.height10 / 2),
+                          padding: EdgeInsets.all(5),
+                          // margin: EdgeInsets.only(
+                          //   top: Dimensions.height10 / 2,
+                          // ),
                           decoration: BoxDecoration(
                               border: Border(
                                   bottom: BorderSide(
@@ -42,16 +46,23 @@ class ViewOrder extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("#order id: " +
-                                  orderList[index].id.toString()),
+                              Text(
+                                "#order id: " + orderList[index].id.toString(),
+                                style: robotoRegular.copyWith(
+                                    fontSize: Dimensions.font12),
+                              ),
                               Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                        color: AppColors.mainColor,
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.radius20 / 4)),
+                                      color: AppColors.mainColor,
+                                      borderRadius: BorderRadius.circular(
+                                          Dimensions.radius20 / 4),
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: Dimensions.width10,
+                                    ),
                                     child: Container(
                                         margin: EdgeInsets.all(
                                             Dimensions.height10 / 2),
@@ -59,7 +70,10 @@ class ViewOrder extends StatelessWidget {
                                           orderList[index]
                                               .orderStatus
                                               .toString(),
-                                          style: TextStyle(color: Colors.white),
+                                          style: robotoMedium.copyWith(
+                                              fontSize: Dimensions.font12,
+                                              color:
+                                                  Theme.of(context).cardColor),
                                         )),
                                   ),
                                   SizedBox(
@@ -67,7 +81,37 @@ class ViewOrder extends StatelessWidget {
                                   ),
                                   InkWell(
                                     onTap: () => null,
-                                    child: Container(child: Text("track")),
+                                    child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: Dimensions.width10,
+                                            vertical: Dimensions.width10 / 2),
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(
+                                                Dimensions.radius20 / 4),
+                                            border: Border.all(
+                                                width: 1,
+                                                color: Theme.of(context)
+                                                    .primaryColor)),
+                                        child: Row(children: [
+                                          Image.asset(
+                                            "assets/image/tracking.png",
+                                            height: Dimensions.height15,
+                                            width: Dimensions.width15,
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                          ),
+                                          SizedBox(
+                                            width: Dimensions.width10 / 2,
+                                          ),
+                                          Text(
+                                            "track order",
+                                            style: robotoMedium.copyWith(
+                                                fontSize: Dimensions.font12,
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                          ),
+                                        ])),
                                   ),
                                 ],
                               ),

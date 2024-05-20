@@ -169,4 +169,9 @@ class CartController extends GetxController {
   void removeCartSharePreference() {
     cartRepo.removeCartSharePreference();
   }
+
+  set setItem(Map<int, CartModel> setItems) {
+    _items = {};
+    _items = setItems;
+  }
 }

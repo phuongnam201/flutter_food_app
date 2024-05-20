@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:food_app/controller/cart_controller.dart';
+import 'package:food_app/controller/food_controller.dart';
 import 'package:food_app/controller/popular_product_controller.dart';
 import 'package:food_app/controller/recommended_product_controller.dart';
 import 'package:food_app/page/cart/cart_page.dart';
@@ -10,19 +11,17 @@ import 'package:food_app/utils/colors.dart';
 import 'package:food_app/utils/dimension.dart';
 import 'package:food_app/widget/app_icon.dart';
 import 'package:food_app/widget/big_text.dart';
-import 'package:food_app/widget/expandable_text_widget.dart';
 import 'package:food_app/widget/small_text.dart';
 import 'package:get/get.dart';
 
-class RecommendedFoodDetail extends StatelessWidget {
+class FoodDetail extends StatelessWidget {
   int pageId;
   String page;
-  RecommendedFoodDetail({super.key, required this.pageId, required this.page});
+  FoodDetail({super.key, required this.pageId, required this.page});
 
   @override
   Widget build(BuildContext context) {
-    var product =
-        Get.find<RecommendedProductController>().recommendedProductList[pageId];
+    var product = Get.find<FoodController>().foodList[pageId];
     Get.find<PopularProductController>()
         .initialProduct(product, Get.find<CartController>());
     return Scaffold(

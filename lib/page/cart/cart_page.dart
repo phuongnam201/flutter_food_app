@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/base/show_custom_message.dart';
 import 'package:food_app/controller/auth_controller.dart';
 import 'package:food_app/controller/cart_controller.dart';
+import 'package:food_app/controller/food_controller.dart';
 import 'package:food_app/controller/location_controller.dart';
 import 'package:food_app/controller/order_controller.dart';
 import 'package:food_app/controller/popular_product_controller.dart';
@@ -89,8 +90,17 @@ class CartPage extends StatelessWidget {
                                         Get.find<RecommendedProductController>()
                                             .recommendedProductList
                                             .indexOf(_cartList[index].product!);
-                                    Get.toNamed(RouteHelper.getRecommendedFood(
-                                        recommendedIndex, "cartPage"));
+                                    if (recommendedIndex >= 0) {
+                                      Get.toNamed(
+                                          RouteHelper.getRecommendedFood(
+                                              recommendedIndex, "cartPage"));
+                                    } else {
+                                      var foodIndex = Get.find<FoodController>()
+                                          .foodList
+                                          .indexOf(_cartList[index].product!);
+                                      Get.toNamed(RouteHelper.getFoodDetail(
+                                          foodIndex, "cartPage"));
+                                    }
                                   }
                                 },
                                 child: Container(

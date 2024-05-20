@@ -1,6 +1,7 @@
 class Product {
   int? _totalSize;
   int? _typeId;
+  int? get type_id => _typeId;
   int? _offset;
   late List<ProductModel> _products;
   List<ProductModel> get products => _products;

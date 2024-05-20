@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:food_app/base/custom_appbar.dart';
 import 'package:food_app/controller/auth_controller.dart';
 import 'package:food_app/controller/order_controller.dart';
 import 'package:food_app/controller/user_controller.dart';
@@ -39,9 +40,8 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Your orders"),
-        backgroundColor: AppColors.mainColor,
+      appBar: CustomAppBar(
+        title: "My orders",
       ),
       body: _isLoggedIn ? _buildOrdersTab() : _buildLoginContainer(),
     );

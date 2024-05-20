@@ -5,6 +5,7 @@ import 'package:food_app/controller/popular_product_controller.dart';
 import 'package:food_app/controller/recommended_product_controller.dart';
 import 'package:food_app/models/product_model.dart';
 import 'package:food_app/page/food/popular_food_detail.dart';
+import 'package:food_app/page/home/widget/grid_item.dart';
 import 'package:food_app/routes/route_helper.dart';
 import 'package:food_app/utils/app_constants.dart';
 import 'package:food_app/utils/colors.dart';
@@ -94,24 +95,27 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              BigText(text: "Recommended"),
-              SizedBox(
-                width: Dimensions.width10,
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 3),
-                child: BigText(
-                  text: '.',
-                  color: Colors.black26,
-                ),
+              BigText(
+                text: "Đề xuất",
+                color: Colors.deepOrange,
               ),
               SizedBox(
                 width: Dimensions.width10,
               ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 3),
-                child: SmallText(text: 'Food pairing'),
-              ),
+              // Container(
+              //   margin: const EdgeInsets.only(bottom: 3),
+              //   child: BigText(
+              //     text: '.',
+              //     color: Colors.black26,
+              //   ),
+              // ),
+              // SizedBox(
+              //   width: Dimensions.width10,
+              // ),
+              // Container(
+              //   margin: const EdgeInsets.only(bottom: 3),
+              //   child: SmallText(text: 'Food pairing'),
+              // ),
             ],
           ),
         ),
@@ -217,13 +221,14 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        IconAndTextWidget(
-                                          icon: Icons.attach_money_rounded,
-                                          text: recommendedProducts
-                                              .recommendedProductList[index]
-                                              .price!
-                                              .toString(),
-                                          iconColor: AppColors.iconColor1,
+                                        SmallText(
+                                          text: "₫ " +
+                                              recommendedProducts
+                                                  .recommendedProductList[index]
+                                                  .price!
+                                                  .toString(),
+                                          color: Colors.deepOrange,
+                                          size: Dimensions.font16 - 2,
                                         ),
                                         IconAndTextWidget(
                                           icon: Icons.location_on,
@@ -250,6 +255,24 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   color: AppColors.mainColor,
                 );
         }),
+
+        //all food
+        Container(
+          margin: EdgeInsets.only(left: Dimensions.width30),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              BigText(
+                text: "Tất cả món ăn",
+                color: Colors.deepOrange,
+              ),
+            ],
+          ),
+        ),
+        GridItem(),
+        SizedBox(
+          height: Dimensions.height10,
+        )
       ],
     );
   }
@@ -392,10 +415,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          IconAndTextWidget(
-                            icon: Icons.attach_money_rounded,
-                            text: popularProduct.price!.toString(),
-                            iconColor: AppColors.iconColor1,
+                          SmallText(
+                            text: "₫ " + popularProduct.price!.toString(),
+                            color: Colors.deepOrange,
+                            size: Dimensions.font16 - 2,
                           ),
                           IconAndTextWidget(
                             icon: Icons.location_on,

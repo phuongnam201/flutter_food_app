@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/base/custom_appbar.dart';
 import 'package:food_app/base/custom_loader.dart';
 import 'package:food_app/controller/auth_controller.dart';
 import 'package:food_app/controller/cart_controller.dart';
@@ -23,6 +24,7 @@ class AccountPage extends StatelessWidget {
       Get.find<LocationController>().getAddressList();
     }
     return Scaffold(
+      appBar: CustomAppBar(title: "Profile"),
       body: GetBuilder<UserController>(builder: (userController) {
         return _userLoggedIn
             ? (!userController.isLoading

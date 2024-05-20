@@ -21,13 +21,14 @@ class IconAndTextWidget extends StatelessWidget {
         Icon(
           icon,
           color: iconColor,
-          size: Dimensions.iconSize24,
+          size: Dimensions.iconSize16 + 2,
         ),
         SizedBox(
-          width: 5,
+          width: Dimensions.width10 / 3,
         ),
         SmallText(
           text: text,
+          size: Dimensions.font16 - 2,
         ),
       ],
     );
