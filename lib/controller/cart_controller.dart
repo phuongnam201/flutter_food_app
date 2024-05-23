@@ -23,22 +23,25 @@ class CartController extends GetxController {
     if (_items.containsKey(product.id!)) {
       _items.update(product.id!, (value) {
         totalQuantity = value.quantity! + quantity;
-
         if (quantity <= 0) {
-          Get.snackbar("Item count", "You can't reduce more",
+          Get.snackbar("Số lượng", "Bạn không thể giảm số lượng nữa",
               margin: EdgeInsets.all(5),
-              backgroundColor: AppColors.mainColor,
+              backgroundColor: Colors.red,
               colorText: Colors.white);
 
           totalQuantity = 1;
         } else if (totalQuantity > 10) {
-          Get.snackbar("Item count", "The maximum quantity is 10",
+          Get.snackbar("Số lượng", "Số lượng tối đa là 10",
+              margin: EdgeInsets.all(5),
+              backgroundColor: Colors.amber,
+              colorText: Colors.white);
+          totalQuantity = 10;
+        } else {
+          Get.snackbar("Số lượng", "${quantity} sản phẩm đã được thêm",
               margin: EdgeInsets.all(5),
               backgroundColor: AppColors.mainColor,
               colorText: Colors.white);
-          totalQuantity = 10;
         }
-        Get.snackbar("Item count", "${quantity} was added to cart");
 
         return CartModel(
           id: value.id,
@@ -68,7 +71,7 @@ class CartController extends GetxController {
           );
         });
       } else {
-        Get.snackbar("Item count", "Quantity should be between 1 and 10",
+        Get.snackbar("Số lượng", "Số lượng chỉ nằm trong khoảng từ 1 đến 10",
             margin: EdgeInsets.all(5),
             backgroundColor: AppColors.mainColor,
             colorText: Colors.white);

@@ -74,7 +74,7 @@ class AppColumn extends StatelessWidget {
                     SizedBox(
                       width: 5,
                     ),
-                    SmallText(text: 'Comments'),
+                    SmallText(text: 'Bình luận'),
                   ],
                 )
               ],
@@ -87,10 +87,10 @@ class AppColumn extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            IconAndTextWidget(
-              icon: Icons.attach_money_rounded,
+            SmallText(
               text: price.toString(),
-              iconColor: AppColors.iconColor1,
+              color: Colors.deepOrange,
+              size: Dimensions.font16 - 2,
             ),
             IconAndTextWidget(
               icon: Icons.location_on,
@@ -99,7 +99,7 @@ class AppColumn extends StatelessWidget {
             ),
             IconAndTextWidget(
               icon: Icons.access_time_rounded,
-              text: "35mins",
+              text: "35 phút",
               iconColor: AppColors.iconColor2,
             ),
           ],

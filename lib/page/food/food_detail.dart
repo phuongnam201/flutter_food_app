@@ -21,7 +21,7 @@ class FoodDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var product = Get.find<FoodController>().foodList[pageId];
+    var product = Get.find<FoodController>().getFoodById(pageId);
     Get.find<PopularProductController>()
         .initialProduct(product, Get.find<CartController>());
     return Scaffold(

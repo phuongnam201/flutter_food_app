@@ -56,4 +56,14 @@ class FoodController extends GetxController {
     }
     update();
   }
+
+  // search by id in foodList
+  ProductModel getFoodById(int id) {
+    for (ProductModel product in _foodList) {
+      if (product.id == id) {
+        return product;
+      }
+    }
+    return ProductModel();
+  }
 }

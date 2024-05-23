@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:food_app/base/common_require_login.dart';
 import 'package:food_app/base/custom_appbar.dart';
 import 'package:food_app/controller/auth_controller.dart';
 import 'package:food_app/controller/order_controller.dart';
@@ -41,9 +42,9 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "My orders",
+        title: "Đơn hàng của bạn",
       ),
-      body: _isLoggedIn ? _buildOrdersTab() : _buildLoginContainer(),
+      body: _isLoggedIn ? _buildOrdersTab() : RequireLogin(),
     );
   }
 
@@ -60,10 +61,10 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
             controller: _tabController,
             tabs: [
               Tab(
-                text: "Current",
+                text: "Đã thanh toán",
               ),
               Tab(
-                text: "History",
+                text: "Chưa thanh toán",
               ),
             ],
           ),
@@ -75,62 +76,6 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
           ]),
         )
       ],
-    );
-  }
-
-  Widget _buildLoginContainer() {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Container(
-              width: double.maxFinite,
-              height: Dimensions.height20 * 7,
-              margin: EdgeInsets.only(
-                left: Dimensions.width20,
-                right: Dimensions.width20,
-              ),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/image/signintocontinue.png"),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: Dimensions.height15,
-          ),
-          GestureDetector(
-            onTap: () {
-              Get.toNamed(RouteHelper.getSignIn());
-            },
-            child: Center(
-              child: Container(
-                width: double.maxFinite,
-                height: Dimensions.height20 * 3,
-                margin: EdgeInsets.only(
-                  left: Dimensions.width20,
-                  right: Dimensions.width20,
-                ),
-                decoration: BoxDecoration(
-                  color: AppColors.mainColor,
-                  borderRadius: BorderRadius.circular(Dimensions.radius15),
-                ),
-                child: Center(
-                  child: BigText(
-                    text: "Sign in",
-                    color: Colors.white,
-                    size: Dimensions.font20,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

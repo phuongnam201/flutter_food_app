@@ -235,7 +235,7 @@ class PopularFoodDetail extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         BigText(
-                          text: "Add to cart",
+                          text: "Thêm vào giỏ hàng",
                           color: Colors.white,
                         ),
                       ],

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/base/custom_appbar.dart';
 import 'package:food_app/base/custom_loader.dart';
 import 'package:food_app/base/show_custom_message.dart';
 import 'package:food_app/controller/auth_controller.dart';
@@ -27,16 +28,16 @@ class SignInPage extends StatelessWidget {
       String password = passwordController.text.trim();
 
       if (email.isEmpty) {
-        showCustomSnachBar("Please enter your email!", title: "Email");
+        showCustomSnachBar("Vui lòng điền email của bạn!", title: "Email");
       } else if (!GetUtils.isEmail(email)) {
-        showCustomSnachBar("Please enter a valid email!",
+        showCustomSnachBar("Hãy điền một email hợp lệ!",
             title: "Email is not valid");
-        showCustomSnachBar("Please enter your email!", title: "Email");
+        // showCustomSnachBar("Please enter your email!", title: "Email");
       } else if (password.isEmpty) {
-        showCustomSnachBar("Please enter your password!", title: "Password");
+        showCustomSnachBar("Vui lòng điền mật khẩu", title: "Password");
       } else if (password.length <= 5) {
-        showCustomSnachBar("Password must have more 6 characters!",
-            title: "Password");
+        showCustomSnachBar("Mật khẩu tối thiểu phải có 6 kí tự!",
+            title: "Mật khẩu");
       } else {
         authController.login(email, password).then((status) {
           if (status.isSuccess) {
@@ -50,6 +51,7 @@ class SignInPage extends StatelessWidget {
     }
 
     return Scaffold(
+        appBar: CustomAppBar(title: "Đăng nhập"),
         backgroundColor: Colors.white,
         body: GetBuilder<AuthController>(builder: (authController) {
           return !authController.isLoading
@@ -57,43 +59,6 @@ class SignInPage extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Container(
-                          //color: Colors.amber,
-                          margin: EdgeInsets.only(top: Dimensions.height20 * 2),
-                          width: Dimensions.screenWidth * 0.9,
-                          child: Positioned(
-                            left: Dimensions.height20,
-                            top: Dimensions.height45,
-                            right: Dimensions.width20,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: AppIcon(
-                                    icon: Icons.arrow_back_ios,
-                                    iconColor: Colors.white,
-                                    iconSize: Dimensions.iconSize24,
-                                    backgroundColor: AppColors.mainColor,
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.toNamed(RouteHelper.getInitial());
-                                  },
-                                  child: AppIcon(
-                                    icon: Icons.home_outlined,
-                                    iconColor: Colors.white,
-                                    iconSize: Dimensions.iconSize24,
-                                    backgroundColor: AppColors.mainColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
                         Container(
                           height: Dimensions.screenHeight * 0.20,
                           child: Center(
@@ -105,11 +70,6 @@ class SignInPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Text(
-                          "Sign In",
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 24),
-                        ),
                         SizedBox(
                           height: 10,
                         ),
@@ -119,7 +79,7 @@ class SignInPage extends StatelessWidget {
                             icon: Icons.email),
                         AppTextField(
                           textController: passwordController,
-                          labelText: "Password",
+                          labelText: "Mật khẩu",
                           icon: Icons.password,
                           obscureText: true,
                         ),
@@ -143,7 +103,7 @@ class SignInPage extends StatelessWidget {
                             ),
                             child: Center(
                               child: BigText(
-                                text: "Login",
+                                text: "Đăng nhập",
                                 color: Colors.white,
                               ),
                             ),
@@ -162,7 +122,7 @@ class SignInPage extends StatelessWidget {
                                 text: TextSpan(
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () => Get.back(),
-                                  text: "Forgot password",
+                                  text: "Quên mật khẩu",
                                   style: TextStyle(
                                     color: Colors.red[400],
                                     fontSize: Dimensions.font16,
@@ -178,7 +138,7 @@ class SignInPage extends StatelessWidget {
                         RichText(
                           text: TextSpan(
                             //recognizer: TapGestureRecognizer()..onTap = () => Get.back(),
-                            text: "Don't have an account? ",
+                            text: "Bạn chưa có tài khoản? ",
                             style: TextStyle(
                               color: Colors.grey[500],
                               fontSize: Dimensions.font16,
@@ -187,7 +147,7 @@ class SignInPage extends StatelessWidget {
                               TextSpan(
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () => Get.to(() => SignUpPage()),
-                                text: "Create",
+                                text: "Đăng kí ngay!",
                                 style: TextStyle(
                                   color: AppColors.mainColor,
                                   fontSize: Dimensions.font16,
@@ -203,7 +163,7 @@ class SignInPage extends StatelessWidget {
                           text: TextSpan(
                             recognizer: TapGestureRecognizer()
                               ..onTap = () => Get.back(),
-                            text: "Log in with",
+                            text: "Đăng nhập với",
                             style: TextStyle(
                               color: Colors.grey[500],
                               fontSize: Dimensions.font16,

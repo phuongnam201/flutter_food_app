@@ -93,15 +93,15 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         Container(
           margin: EdgeInsets.only(left: Dimensions.width30),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BigText(
                 text: "Đề xuất",
                 color: Colors.deepOrange,
               ),
-              SizedBox(
-                width: Dimensions.width10,
-              ),
+              // SizedBox(
+              //   width: Dimensions.width10,
+              // ),
               // Container(
               //   margin: const EdgeInsets.only(bottom: 3),
               //   child: BigText(
@@ -127,6 +127,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           //print("ok");
           return recommendedProducts.isLoaded
               ? ListView.builder(
+                  padding: EdgeInsets.only(top: Dimensions.height10),
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: recommendedProducts.recommendedProductList.length,
@@ -232,12 +233,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                         ),
                                         IconAndTextWidget(
                                           icon: Icons.location_on,
-                                          text: "1.8km",
+                                          text: "1.8 km",
                                           iconColor: AppColors.mainColor,
                                         ),
                                         IconAndTextWidget(
                                           icon: Icons.access_time_rounded,
-                                          text: "35mins",
+                                          text: "35 phút",
                                           iconColor: AppColors.iconColor2,
                                         ),
                                       ],
@@ -255,7 +256,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   color: AppColors.mainColor,
                 );
         }),
-
+        SizedBox(
+          height: Dimensions.height20,
+        ),
         //all food
         Container(
           margin: EdgeInsets.only(left: Dimensions.width30),
@@ -402,7 +405,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                   SizedBox(
                                     width: 5,
                                   ),
-                                  SmallText(text: 'Comments'),
+                                  SmallText(text: 'Bình luận'),
                                 ],
                               )
                             ],
@@ -422,12 +425,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                           ),
                           IconAndTextWidget(
                             icon: Icons.location_on,
-                            text: "1.7km",
+                            text: "1.8 km",
                             iconColor: AppColors.mainColor,
                           ),
                           IconAndTextWidget(
                             icon: Icons.access_time_rounded,
-                            text: "35mins",
+                            text: "35 phút  ",
                             iconColor: AppColors.iconColor2,
                           ),
                         ],

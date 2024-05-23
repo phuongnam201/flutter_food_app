@@ -31,6 +31,7 @@ class ViewOrder extends StatelessWidget {
                 child: ListView.builder(
                     itemCount: orderList.length,
                     itemBuilder: (context, index) {
+                      print(orderList[index].orderStatus.toString());
                       return InkWell(
                         onTap: () => null,
                         child: Container(
@@ -66,15 +67,24 @@ class ViewOrder extends StatelessWidget {
                                     child: Container(
                                         margin: EdgeInsets.all(
                                             Dimensions.height10 / 2),
-                                        child: Text(
-                                          orderList[index]
-                                              .orderStatus
-                                              .toString(),
-                                          style: robotoMedium.copyWith(
-                                              fontSize: Dimensions.font12,
-                                              color:
-                                                  Theme.of(context).cardColor),
-                                        )),
+                                        child: orderList[index]
+                                                .orderStatus
+                                                .toString()
+                                                .contains("null")
+                                            ? Text(
+                                                "Chưa thanh toán",
+                                                style: robotoMedium.copyWith(
+                                                    fontSize: Dimensions.font12,
+                                                    color: Theme.of(context)
+                                                        .cardColor),
+                                              )
+                                            : Text(
+                                                "Đã thanh toán",
+                                                style: robotoMedium.copyWith(
+                                                    fontSize: Dimensions.font12,
+                                                    color: Theme.of(context)
+                                                        .cardColor),
+                                              )),
                                   ),
                                   SizedBox(
                                     height: Dimensions.height10 / 2,
@@ -105,7 +115,7 @@ class ViewOrder extends StatelessWidget {
                                             width: Dimensions.width10 / 2,
                                           ),
                                           Text(
-                                            "track order",
+                                            "Theo dõi đơn hàng",
                                             style: robotoMedium.copyWith(
                                                 fontSize: Dimensions.font12,
                                                 color: Theme.of(context)

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class OrderController extends GetxController implements GetxService {
   OrderRepo orderRepo;
   OrderController({required this.orderRepo});
-  
+
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
@@ -16,13 +16,22 @@ class OrderController extends GetxController implements GetxService {
   late List<OrderModel> _historyOrderList;
   List<OrderModel> get historyOrderList => _historyOrderList;
 
+  int _paymentIndex = 0;
+  int get paymentIndex => _paymentIndex;
+
+  String _orderType = "delivery";
+  String get orderType => _orderType;
+
+  String _foodNote = "";
+  String get foodNote => _foodNote;
+
   Future<void> placeOrder(
       PlaceOrderBody placeOrderBody, Function callback) async {
     _isLoading = true;
     Response response = await orderRepo.placeOrder(placeOrderBody);
     print("status code at order controller " + response.statusCode.toString());
-    print("place order at order controler" +
-        response.body['order_id'].toString());
+    //print("place order at order controler" +
+    //  response.body['order_id'].toString());
     if (response.statusCode == 200) {
       _isLoading = false;
       String message = response.body['message'];
@@ -39,24 +48,39 @@ class OrderController extends GetxController implements GetxService {
     if (response.statusCode == 200) {
       _historyOrderList = [];
       _currentOrderList = [];
-      response.body.forEach((order){
+      response.body.forEach((order) {
         OrderModel orderModel = OrderModel.fromJson(order);
-        if(orderModel.orderStatus =='pending'||
-        orderModel.orderStatus =='success'||
-        orderModel.orderStatus =='accepted'||
-        orderModel.orderStatus =='pending'){
+        if (orderModel.orderStatus == 'pending' ||
+            orderModel.orderStatus == 'success' ||
+            orderModel.orderStatus == 'accepted' ||
+            orderModel.orderStatus == 'pending') {
           currentOrderList.add(orderModel);
-        }else{
+        } else {
           historyOrderList.add(orderModel);
         }
       });
-    }else{
+    } else {
       _historyOrderList = [];
       _currentOrderList = [];
     }
     _isLoading = false;
-    print("length of list: " + _currentOrderList.length.toString());
-    print("history of list: " + _historyOrderList.length.toString());
+    //print("length of list: " + _currentOrderList.length.toString());
+    //print("history of list: " + _historyOrderList.length.toString());
     update();
+  }
+
+  void setPaymentIndex(int index) {
+    _paymentIndex = index;
+    update();
+  }
+
+  void setDeliveryType(String type) {
+    _orderType = type;
+    update();
+  }
+
+  void setFoodNote(String note) {
+    _foodNote = note;
+    //update();
   }
 }

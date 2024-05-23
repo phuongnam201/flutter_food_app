@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:food_app/base/custom_appbar.dart';
 import 'package:food_app/controller/cart_controller.dart';
+import 'package:food_app/controller/order_history_controller.dart';
 import 'package:food_app/models/cart_model.dart';
 import 'package:food_app/utils/app_constants.dart';
 import 'package:food_app/utils/colors.dart';
 import 'package:food_app/utils/dimension.dart';
-import 'package:food_app/widget/app_icon.dart';
-import 'package:food_app/widget/big_text.dart';
+
 import 'package:food_app/widget/small_text.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -17,6 +18,10 @@ class CartHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // var getOrderHistory =
+    //     Get.find<OrderHistoryController>().getOrderHistoryList();
+    // print(getOrderHistory);
+
     var getCartHistoryList =
         Get.find<CartController>().getCartHistoryList().reversed.toList();
     Map<String, int> cartItemsPerOrder = Map();
@@ -42,28 +47,29 @@ class CartHistory extends StatelessWidget {
     var listCounter = 0;
 
     return Scaffold(
+      appBar: CustomAppBar(title: "Lịch sử giỏ hàng"),
       body: Column(
         children: [
-          Container(
-            height: Dimensions.height20 * 4,
-            color: AppColors.mainColor,
-            width: double.maxFinite,
-            padding: EdgeInsets.only(
-                top: Dimensions.height10, bottom: Dimensions.height10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                BigText(
-                  text: "Cart History",
-                  color: Colors.white,
-                ),
-                AppIcon(
-                  icon: Icons.shopping_cart,
-                  iconColor: AppColors.mainColor,
-                ),
-              ],
-            ),
-          ),
+          // Container(
+          //   height: Dimensions.height20 * 4,
+          //   color: AppColors.mainColor,
+          //   width: double.maxFinite,
+          //   padding: EdgeInsets.only(
+          //       top: Dimensions.height10, bottom: Dimensions.height10),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //     children: [
+          //       BigText(
+          //         text: "Cart History",
+          //         color: Colors.white,
+          //       ),
+          //       AppIcon(
+          //         icon: Icons.shopping_cart,
+          //         iconColor: AppColors.mainColor,
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Expanded(
             child: MediaQuery.removePadding(
               removeTop: true,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/base/common_require_login.dart';
 import 'package:food_app/base/custom_appbar.dart';
 import 'package:food_app/base/custom_loader.dart';
 import 'package:food_app/controller/auth_controller.dart';
@@ -24,7 +25,7 @@ class AccountPage extends StatelessWidget {
       Get.find<LocationController>().getAddressList();
     }
     return Scaffold(
-      appBar: CustomAppBar(title: "Profile"),
+      appBar: CustomAppBar(title: "Thông tin cá nhân"),
       body: GetBuilder<UserController>(builder: (userController) {
         return _userLoggedIn
             ? (!userController.isLoading
@@ -60,7 +61,7 @@ class AccountPage extends StatelessWidget {
                                     ),
                                     bigText: BigText(
                                         text: userController.userModel?.name ??
-                                            "Null".toString())),
+                                            "loading".toString())),
                                 SizedBox(
                                   width: Dimensions.height10,
                                 ),
@@ -75,7 +76,7 @@ class AccountPage extends StatelessWidget {
                                     ),
                                     bigText: BigText(
                                         text: userController.userModel?.phone ??
-                                            "Null")),
+                                            "loading")),
                                 SizedBox(
                                   width: Dimensions.height10,
                                 ),
@@ -90,7 +91,7 @@ class AccountPage extends StatelessWidget {
                                     ),
                                     bigText: BigText(
                                         text: userController.userModel?.email ??
-                                            "Null")),
+                                            "loading")),
                                 SizedBox(
                                   width: Dimensions.height10,
                                 ),
@@ -113,8 +114,8 @@ class AccountPage extends StatelessWidget {
                                                 Dimensions.height10 * 5 / 2,
                                             size: Dimensions.height10 * 5,
                                           ),
-                                          bigText: BigText(
-                                              text: "fill your address")),
+                                          bigText:
+                                              BigText(text: "Thêm địa chỉ")),
                                     );
                                   } else {
                                     return GestureDetector(
@@ -132,7 +133,7 @@ class AccountPage extends StatelessWidget {
                                             size: Dimensions.height10 * 5,
                                           ),
                                           bigText:
-                                              BigText(text: "Your address")),
+                                              BigText(text: "Địa chỉ của bạn")),
                                     );
                                   }
                                 }),
@@ -148,7 +149,7 @@ class AccountPage extends StatelessWidget {
                                       iconSize: Dimensions.height10 * 5 / 2,
                                       size: Dimensions.height10 * 5,
                                     ),
-                                    bigText: BigText(text: "Message")),
+                                    bigText: BigText(text: "Liên hệ")),
                                 SizedBox(
                                   width: Dimensions.height10,
                                 ),
@@ -173,7 +174,7 @@ class AccountPage extends StatelessWidget {
                                         iconSize: Dimensions.height10 * 5 / 2,
                                         size: Dimensions.height10 * 5,
                                       ),
-                                      bigText: BigText(text: "Logout")),
+                                      bigText: BigText(text: "Đăng xuất")),
                                 ),
                               ],
                             ),
@@ -183,60 +184,7 @@ class AccountPage extends StatelessWidget {
                     ),
                   )
                 : CustomLoader())
-            : Container(
-                color: Colors.white,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: Container(
-                        width: double.maxFinite,
-                        height: Dimensions.height20 * 7,
-                        margin: EdgeInsets.only(
-                          left: Dimensions.width20,
-                          right: Dimensions.width20,
-                        ),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image:
-                                AssetImage("assets/image/signintocontinue.png"),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: Dimensions.height15,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(RouteHelper.getSignIn());
-                      },
-                      child: Center(
-                        child: Container(
-                          width: double.maxFinite,
-                          height: Dimensions.height20 * 3,
-                          margin: EdgeInsets.only(
-                            left: Dimensions.width20,
-                            right: Dimensions.width20,
-                          ),
-                          decoration: BoxDecoration(
-                              color: AppColors.mainColor,
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.radius15)),
-                          child: Center(
-                            child: BigText(
-                              text: "Sign in",
-                              color: Colors.white,
-                              size: Dimensions.font20,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
+            : RequireLogin();
       }),
     );
   }

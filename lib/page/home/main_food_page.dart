@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/controller/food_controller.dart';
 import 'package:food_app/controller/popular_product_controller.dart';
 import 'package:food_app/controller/recommended_product_controller.dart';
 import 'package:food_app/page/home/food_page_body.dart';
@@ -20,6 +21,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
   Future<void> _loadResource() async {
     await Get.find<PopularProductController>().getPopularProductList();
     await Get.find<RecommendedProductController>().getRecommendedProductList();
+    await Get.find<FoodController>().getAllFoodList();
   }
 
   @override

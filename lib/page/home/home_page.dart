@@ -1,5 +1,4 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/page/account/account_page.dart';
 import 'package:food_app/page/auth/sign_up_page.dart';
@@ -30,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: pages[_selectedIndex],
       bottomNavigationBar: CurvedNavigationBar(
-        height: Dimensions.height70,
+        height: Dimensions.height70 - 10,
         backgroundColor: const Color.fromARGB(0, 0, 0, 0),
         color: AppColors.mainColor,
         animationDuration: Duration(milliseconds: 400),

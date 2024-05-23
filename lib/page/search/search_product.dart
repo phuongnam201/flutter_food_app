@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/base/custom_appbar.dart';
 import 'package:food_app/controller/food_controller.dart';
 import 'package:food_app/routes/route_helper.dart';
 import 'package:food_app/utils/app_constants.dart';
@@ -25,9 +26,11 @@ class _SearchProductPageState extends State<SearchProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Tìm kiếm món ăn"),
-        backgroundColor: AppColors.mainColor,
+      appBar: CustomAppBar(
+        title: "Tìm kiếm món ăn",
+        onBackPressed: () {
+          navigator?.pop(context);
+        },
       ),
       body: Column(
         children: [
@@ -53,7 +56,7 @@ class _SearchProductPageState extends State<SearchProductPage> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              //print(foodController.foodListSearch[index].name);
+                              print(foodController.foodListSearch[index].id);
                               Get.toNamed(RouteHelper.getFoodDetail(
                                   foodController.foodListSearch[index].id!,
                                   "searchPage"));

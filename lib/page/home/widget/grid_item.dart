@@ -23,6 +23,7 @@ class GridItem extends StatelessWidget {
             left: Dimensions.width20, right: Dimensions.width20),
         width: Dimensions.screenWidth,
         child: GridView.builder(
+          padding: EdgeInsets.only(top: Dimensions.height10),
           physics:
               NeverScrollableScrollPhysics(), // Disable GridView's scrolling
           shrinkWrap: true, // Wrap the GridView inside SingleChildScrollView
@@ -114,7 +115,7 @@ class GridItem extends StatelessWidget {
                               width: Dimensions.screenWidth * 0.4,
                               child: IconAndTextWidget(
                                 icon: Icons.access_time_rounded,
-                                text: "35mins",
+                                text: "35 phút",
                                 iconColor: AppColors.iconColor2,
                               )),
                           SizedBox(
