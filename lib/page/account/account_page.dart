@@ -25,7 +25,18 @@ class AccountPage extends StatelessWidget {
       Get.find<LocationController>().getAddressList();
     }
     return Scaffold(
-      appBar: CustomAppBar(title: "Thông tin cá nhân"),
+      appBar: CustomAppBar(
+        title: "Thông tin cá nhân",
+        actions: [
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {
+              Get.toNamed(RouteHelper.getEditProfile());
+            },
+            color: Colors.white,
+          ),
+        ],
+      ),
       body: GetBuilder<UserController>(builder: (userController) {
         return _userLoggedIn
             ? (!userController.isLoading

@@ -35,8 +35,8 @@ class OrderSuccessPage extends StatelessWidget {
               ),
               Text(
                 status == 1
-                    ? "Your place the order successfully"
-                    : "Your order failed ",
+                    ? "Bạn đặt đã đặt hàng có mã đơn ${orderID}"
+                    : "Đơn hàng có mã đơn  ${orderID}",
                 style: TextStyle(fontSize: Dimensions.font20),
               ),
               SizedBox(
@@ -47,7 +47,7 @@ class OrderSuccessPage extends StatelessWidget {
                     horizontal: Dimensions.height20,
                     vertical: Dimensions.height20),
                 child: Text(
-                  status == 1 ? "Successfully order" : "Failed order",
+                  status == 1 ? "Thành công" : "Thất bại",
                   style: TextStyle(
                       fontSize: Dimensions.font20,
                       color: Theme.of(context).disabledColor),

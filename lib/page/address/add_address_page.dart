@@ -213,27 +213,27 @@ class _AddAddressPageState extends State<AddAddressPage> {
                     ),
                     Container(
                         margin: EdgeInsets.only(left: Dimensions.width20),
-                        child: BigText(text: "Delivery Address")),
+                        child: BigText(text: "Địa chỉ nhận hàng")),
                     SizedBox(
                       height: 5,
                     ),
                     AppTextField(
                         textController: _addressController,
-                        labelText: "Your Address",
+                        labelText: "Địa chỉ",
                         icon: Icons.location_on),
                     SizedBox(
                       height: 5,
                     ),
                     AppTextField(
                         textController: _contactPersonName,
-                        labelText: "Your name",
+                        labelText: "Tên",
                         icon: Icons.person),
                     SizedBox(
                       height: 5,
                     ),
                     AppTextField(
                         textController: _contactPersonNumber,
-                        labelText: "Your Phone",
+                        labelText: "Số điện thoại",
                         icon: Icons.phone),
                   ],
                 ),

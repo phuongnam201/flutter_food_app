@@ -1,4 +1,5 @@
 import 'package:food_app/models/order_model.dart';
+import 'package:food_app/page/account/update_infor_page.dart';
 import 'package:food_app/page/address/add_address_page.dart';
 import 'package:food_app/page/address/pick_address_map.dart';
 import 'package:food_app/page/auth/sign_in_page.dart';
@@ -26,9 +27,11 @@ class RouteHelper {
   static const String payment = "/payment";
   static const String orderSuccess = "/order-successful";
   static const String searchProduct = "/search";
+  static const String editProfile = "/edit-profile";
 
   static String getInitial() => '$initial';
   static String getSplashPage() => '$splashPage';
+  static String getEditProfile() => '$editProfile';
   static String getSearchProduct() => '$searchProduct';
   static String getPopularFood(int pageId, String page) =>
       '$popularFood?pageId=$pageId&page=$page';
@@ -79,6 +82,13 @@ class RouteHelper {
       name: cartPage,
       page: () {
         return CartPage();
+      },
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: editProfile,
+      page: () {
+        return EditProfile();
       },
       transition: Transition.fadeIn,
     ),

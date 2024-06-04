@@ -1,5 +1,6 @@
 import 'package:food_app/data/api/api_client.dart';
 import 'package:food_app/models/signup_body_model.dart';
+import 'package:food_app/models/update_model.dart';
 import 'package:food_app/utils/app_constants.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,5 +54,10 @@ class AuthRepo {
     } catch (e) {
       throw e;
     }
+  }
+
+  Future<Response> updateUserInfor(UpdateModel updateModel) async {
+    return await apiClient.postData(
+        AppConstants.USER_UPDATE_INFO_URI, updateModel.toJson());
   }
 }

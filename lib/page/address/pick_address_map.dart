@@ -147,7 +147,7 @@ class _PickAddressMapState extends State<PickAddressMap> {
                     child: Center(
                       child: CustomButton(
                         //width: Dimensions.width20 * 10,
-                        buttonText: "Pick address",
+                        buttonText: "Chọn địa chỉ",
                         // locationController.inZone
                         //     ? widget.fromAddress
                         //         ? 'Pick Address'

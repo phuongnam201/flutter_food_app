@@ -56,36 +56,37 @@ class ViewOrder extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Container(
-                                    decoration: BoxDecoration(
-                                      color: AppColors.mainColor,
-                                      borderRadius: BorderRadius.circular(
-                                          Dimensions.radius20 / 4),
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: Dimensions.width10,
-                                    ),
-                                    child: Container(
-                                        margin: EdgeInsets.all(
-                                            Dimensions.height10 / 2),
-                                        child: orderList[index]
-                                                .orderStatus
-                                                .toString()
-                                                .contains("null")
-                                            ? Text(
-                                                "Chưa thanh toán",
-                                                style: robotoMedium.copyWith(
-                                                    fontSize: Dimensions.font12,
-                                                    color: Theme.of(context)
-                                                        .cardColor),
-                                              )
-                                            : Text(
-                                                "Đã thanh toán",
-                                                style: robotoMedium.copyWith(
-                                                    fontSize: Dimensions.font12,
-                                                    color: Theme.of(context)
-                                                        .cardColor),
-                                              )),
-                                  ),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.mainColor,
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.radius20 / 4),
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: Dimensions.width10,
+                                      ),
+                                      child: Container(
+                                          margin: EdgeInsets.all(
+                                              Dimensions.height10 / 2),
+                                          child: orderList[index]
+                                                  .orderStatus
+                                                  .toString()
+                                                  .contains("success")
+                                              ? Text(
+                                                  "Đã thanh toán",
+                                                  style: robotoMedium.copyWith(
+                                                      fontSize:
+                                                          Dimensions.font12,
+                                                      color: Theme.of(context)
+                                                          .cardColor),
+                                                )
+                                              : Text(
+                                                  "Chưa thanh toán",
+                                                  style: robotoMedium.copyWith(
+                                                      fontSize:
+                                                          Dimensions.font12,
+                                                      color: Theme.of(context)
+                                                          .cardColor),
+                                                ))),
                                   SizedBox(
                                     height: Dimensions.height10 / 2,
                                   ),

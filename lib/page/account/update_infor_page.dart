@@ -4,7 +4,9 @@ import 'package:food_app/base/custom_appbar.dart';
 import 'package:food_app/base/custom_loader.dart';
 import 'package:food_app/base/show_custom_message.dart';
 import 'package:food_app/controller/auth_controller.dart';
+import 'package:food_app/controller/user_controller.dart';
 import 'package:food_app/models/signup_body_model.dart';
+import 'package:food_app/models/update_model.dart';
 import 'package:food_app/page/auth/sign_in_page.dart';
 import 'package:food_app/routes/route_helper.dart';
 import 'package:food_app/utils/colors.dart';
@@ -14,25 +16,31 @@ import 'package:food_app/widget/app_text_field.dart';
 import 'package:food_app/widget/big_text.dart';
 import 'package:get/get.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+class EditProfile extends StatelessWidget {
+  const EditProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
     var emailController = TextEditingController();
     var nameController = TextEditingController();
-    var passwordController = TextEditingController();
-    var rePasswordController = TextEditingController();
     var phoneController = TextEditingController();
-    var signUpImage = ["f.png", "g.png"];
+    var passwordController = TextEditingController();
 
-    void _registration() {
+    final UserController userController = Get.find<UserController>();
+    userController.getUserInfo().then((_) {
+      if (userController.userModel != null) {
+        nameController.text = userController.userModel!.name;
+        emailController.text = userController.userModel!.email;
+        phoneController.text = userController.userModel!.phone;
+      }
+    });
+
+    void _updateInfor() {
       var authController = Get.find<AuthController>();
       String name = nameController.text.trim();
       String phone = phoneController.text.trim();
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
-      String rePassword = rePasswordController.text.trim();
 
       if (name.isEmpty) {
         showCustomSnachBar("Vui lòng điền tên của bạn!", title: "Tên");
@@ -42,24 +50,20 @@ class SignUpPage extends StatelessWidget {
         showCustomSnachBar("Vui lòng điền email hợp lệ!",
             title: "Email không hợp lệ");
         //showCustomSnachBar("Please enter your email!", title: "Email");
-      } else if (password.isEmpty) {
-        showCustomSnachBar("Vui lòng điền mật khẩu!", title: "Mật khẩu");
-      } else if (password.length <= 5) {
-        showCustomSnachBar("Mật khẩu phải có ít nhất 6 kí tự!",
-            title: "Mật khẩu");
-      } else if (rePassword != password) {
-        showCustomSnachBar("Mật khẩu không khớp!", title: "Mật khẩu");
       } else if (phone.isEmpty) {
         showCustomSnachBar("Vui lòng điền số điện thoại",
             title: "Số điện thoại");
+      } else if (password.isNotEmpty && password.length <= 5) {
+        showCustomSnachBar("Mật khẩu phải có ít nhất 6 kí tự!",
+            title: "Mật khẩu");
       } else {
-        SignUpBody signUpBody = SignUpBody(
+        UpdateModel updateModel = UpdateModel(
             name: name, email: email, phone: phone, password: password);
         //print(signUpBody.toJson());
         //print("result" + authController.registration(signUpBody).toString());
-        authController.registration(signUpBody).then((status) {
+        authController.updateInfor(updateModel).then((status) {
           if (status.isSuccess) {
-            print("ok");
+            Get.toNamed(RouteHelper.getInitial());
           } else {
             showCustomSnachBar(status.message);
           }
@@ -68,7 +72,10 @@ class SignUpPage extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: CustomAppBar(title: "Đăng kí"),
+      appBar: CustomAppBar(
+        title: "Cập nhật thông tin",
+        backButtonExist: true,
+      ),
       backgroundColor: Colors.white,
       body: GetBuilder<AuthController>(builder: (_authController) {
         return !_authController.isLoading
@@ -88,7 +95,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Nhập thông tin đăng kí",
+                      "Nhập thông tin của bạn",
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 24),
                     ),
@@ -104,28 +111,38 @@ class SignUpPage extends StatelessWidget {
                         labelText: "Email",
                         icon: Icons.email),
                     AppTextField(
-                      textController: passwordController,
-                      labelText: "Mật khẩu",
-                      icon: Icons.password,
-                      obscureText: true,
-                    ),
-                    AppTextField(
-                      textController: rePasswordController,
-                      labelText: "Xác nhận mật khẩu",
-                      icon: Icons.password,
-                      obscureText: true,
-                    ),
-                    AppTextField(
                       textController: phoneController,
                       labelText: "Số điện thoại",
                       icon: Icons.phone,
+                    ),
+                    Container(
+                      child: Column(
+                        //crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppTextField(
+                            textController: passwordController,
+                            labelText: "Mật khẩu",
+                            icon: Icons.password,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height10,
+                          ),
+                          Container(
+                              margin: EdgeInsets.only(left: Dimensions.width20),
+                              width: Dimensions.screenWidth,
+                              child: Text(
+                                "* Vui lòng để trống mật khẩu nếu không thay đổi",
+                                style: TextStyle(color: Colors.deepOrange),
+                              )),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: Dimensions.height20,
                     ),
                     GestureDetector(
                       onTap: () {
-                        _registration();
+                        _updateInfor();
                       },
                       child: Container(
                         margin: EdgeInsets.only(
@@ -140,7 +157,7 @@ class SignUpPage extends StatelessWidget {
                         ),
                         child: Center(
                           child: BigText(
-                            text: "Đăng kí",
+                            text: "Lưu",
                             color: Colors.white,
                           ),
                         ),
@@ -149,54 +166,9 @@ class SignUpPage extends StatelessWidget {
                     SizedBox(
                       height: Dimensions.height10,
                     ),
-                    RichText(
-                      text: TextSpan(
-                        //recognizer: TapGestureRecognizer()
-                        // ..onTap = () => Get.to(() => SignInPage()),
-                        text: "Bạn đã có tài khoản ? ",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: Dimensions.font16,
-                        ),
-                        children: [
-                          TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () => Get.to(() => SignInPage()),
-                            text: "Đăng nhập ngay!",
-                            style: TextStyle(
-                              color: AppColors.mainColor,
-                              fontSize: Dimensions.font16,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     SizedBox(
                       height: Dimensions.screenHeight * 0.05,
                     ),
-                    // RichText(
-                    //   text: TextSpan(
-                    //     recognizer: TapGestureRecognizer()
-                    //       ..onTap = () => Get.back(),
-                    //     text: "Sign up using one of the following methods",
-                    //     style: TextStyle(
-                    //       color: Colors.grey[500],
-                    //       fontSize: Dimensions.font16,
-                    //     ),
-                    //   ),
-                    // ),
-                    // Wrap(
-                    //   children: List.generate(
-                    //       signUpImage.length,
-                    //       (index) => Padding(
-                    //             padding: EdgeInsets.all(10.0),
-                    //             child: CircleAvatar(
-                    //               radius: Dimensions.radius20,
-                    //               backgroundImage: AssetImage(
-                    //                   "assets/image/" + signUpImage[index]),
-                    //             ),
-                    //           )),
-                    // ),
                   ],
                 ),
               )

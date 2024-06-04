@@ -7,12 +7,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool backButtonExist;
   final Function? onBackPressed;
+  final List<Widget>? actions;
 
   CustomAppBar(
       {super.key,
       required this.title,
       this.backButtonExist = true,
-      this.onBackPressed});
+      this.onBackPressed,
+      this.actions});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               color: Colors.white,
             )
           : SizedBox(),
+      actions: actions,
     );
   }
 

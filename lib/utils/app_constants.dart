@@ -12,6 +12,7 @@ class AppConstants {
   static const String REGISTRATION_URI = "/api/v1/auth/register";
   static const String LOGIN_URI = "/api/v1/auth/login";
   static const String USER_INFO_URI = "/api/v1/customer/info";
+  static const String USER_UPDATE_INFO_URI = "/api/v1/customer/update-info";
 
   //google map and address
   static const String USER_ADDRESS = "user_address";

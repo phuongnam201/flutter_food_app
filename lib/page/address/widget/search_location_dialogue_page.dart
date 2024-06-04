@@ -33,7 +33,7 @@ class LocationDialogue extends StatelessWidget {
                 textCapitalization: TextCapitalization.words,
                 keyboardType: TextInputType.streetAddress,
                 decoration: InputDecoration(
-                  hintText: "Search your location",
+                  hintText: "Tìm kiếm địa điểm",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(Dimensions.radius10),
                     borderSide: BorderSide(style: BorderStyle.none, width: 0),

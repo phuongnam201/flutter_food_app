@@ -1,6 +1,7 @@
 import 'package:food_app/data/repository/auth_repo.dart';
 import 'package:food_app/models/response_model.dart';
 import 'package:food_app/models/signup_body_model.dart';
+import 'package:food_app/models/update_model.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController implements GetxService {
@@ -46,6 +47,24 @@ class AuthController extends GetxController implements GetxService {
       responseModel = ResponseModel(false, response.statusText!);
       //print("loi:" + response.statusCode.toString());
     }
+    _isLoading = false;
+    update();
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateInfor(UpdateModel updateModel) async {
+    _isLoading = true;
+    update();
+    Response response = await authRepo.updateUserInfor(updateModel);
+
+    late ResponseModel responseModel;
+    if (response.statusCode == 200) {
+      responseModel = ResponseModel(true, response.body["message"]);
+    } else {
+      print("xit");
+      responseModel = ResponseModel(false, response.statusText!);
+    }
+
     _isLoading = false;
     update();
     return responseModel;
