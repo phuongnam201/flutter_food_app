@@ -4,7 +4,7 @@ A Flutter project about food apps.
 
 ## Getting Started
 
-Step 1: To obtain the API for this application, the backend must be configured. Link backend_foodapp: https://github.com/phuongnam201  
+Step 1: To obtain the API for this application, the backend must be configured. Link backend_foodapp: https://github.com/phuongnam201/backend_foodapp  
 Step 2: You can clone this source after setting up the backend.  
 Step 3: Launch the project and issue the command. flutter Bar obtain  
 Step 4: Update the file root/android/app/src/main /AndroidManifest.xml (line 39) using your Google map API key.  
